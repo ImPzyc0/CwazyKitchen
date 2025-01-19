@@ -5,6 +5,9 @@ import com.daniel.GSprite.Util.Vector2D;
 import java.awt.*;
 
 public class Main {
+
+    public static GameManager gManager;
+
     public static void main(String[] args) {
        //Zum Aufbau von meiner Aplu-Library, damit der Code der GPanelSpriteApi Sinn ergibt
         //Die Library benutzt sehr viele Klassen, die "verboten" sind (Hashmaps, ArrayLists etc.). Der Code ist 100% selber geschrieben
@@ -49,16 +52,7 @@ public class Main {
         Das Projekt ist auf Englisch. Ich finde es komisch Sachen auf Deutsch zu benennen. Vielleicht veröffentlichte ich den Code irgendwo ja ??
         */
         //The surroundings of the kitchen
-        GUtility enviromentUtil = new GUtility(750, 500);
-        enviromentUtil.getPanel().getWindow().setBgColor(Color.GRAY);
 
-        RectangleColoredHitboxSprite leftWall = new RectangleColoredHitboxSprite(new Vector2D(100, 249), enviromentUtil, new Vector2D(20, 505), Color.BLACK, true);
-        RectangleColoredHitboxSprite rightWall = new RectangleColoredHitboxSprite(new Vector2D(650, 249), enviromentUtil, new Vector2D(20, 505), Color.BLACK, true);
-        RectangleColoredHitboxSprite topWall = new RectangleColoredHitboxSprite(new Vector2D(375, 492), enviromentUtil, new Vector2D(550, 20), Color.BLACK, true);
-        RectangleColoredHitboxSprite bottomWall = new RectangleColoredHitboxSprite(new Vector2D(375, 7), enviromentUtil, new Vector2D(550, 20), Color.BLACK, true);
-
-        enviromentUtil.draw();
-
-
+       gManager = new GameManager(Constants.FPS, Constants.WIDTH, Constants.HEIGHT, Constants.BACKGROUNDCOLOR);
     }
 }
