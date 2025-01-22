@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class Player extends RectangleColoredHitboxSprite {//A player as shown in the game, name id etc.
 
-    private final int id;
+    protected int id;
     private final String name;
 
     public Player(Vector2D position, GUtility util, Vector2D hitboxSize, Color color, boolean fill, int id, String name) {
@@ -17,6 +17,9 @@ public class Player extends RectangleColoredHitboxSprite {//A player as shown in
         this.name = name;
     }
 
+    public int getId() {
+        return id;
+    }
 
 
 }

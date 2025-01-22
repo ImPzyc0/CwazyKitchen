@@ -17,6 +17,8 @@ public class GameManager { //GameLoop, updates, Room, times
     private final PlayerSelf self;
     private final List<Player> players = new List<Player>();
 
+    private final KitchenClient client;
+
     private boolean w, a, s, d = false;
 
     public GameManager(int fps, int width, int height, Color backgroundColor) {
@@ -27,8 +29,11 @@ public class GameManager { //GameLoop, updates, Room, times
         kManager = new KitchenManager();
         self = new PlayerSelf(new Vector2D((double) Constants.WIDTH / 2, (double) Constants.HEIGHT / 2), util, new Vector2D(Constants.PLAYERSIZE, Constants.PLAYERSIZE), Constants.PLAYERCOLOR, true, 0, "Self");
 
+        this.client = new KitchenClient(this);
+
         setKitchen();
         //setRoomScreen();
+
 
         gameLoop();
 
@@ -102,7 +107,7 @@ public class GameManager { //GameLoop, updates, Room, times
         }, 0, 1000 / FPS);
     }
 
-    private void setKitchen() {
+    private void setKitchen() { //Setting the scenery, stations etc.
 
         RectangleColoredHitboxSprite leftWall = new RectangleColoredHitboxSprite(new Vector2D(Constants.WIDTH / 7.5, (double) Constants.HEIGHT / 2), util, new Vector2D((double) Constants.WIDTH / 37.5, Constants.HEIGHT * 1.01), Color.BLACK, true);
         RectangleColoredHitboxSprite rightWall = new RectangleColoredHitboxSprite(new Vector2D((Constants.WIDTH / 7.5) * 6.5, (double) Constants.HEIGHT / 2), util, new Vector2D((double) Constants.WIDTH / 37.5, Constants.HEIGHT * 1.01), Color.BLACK, true);
@@ -118,6 +123,10 @@ public class GameManager { //GameLoop, updates, Room, times
     private void setRoomScreen() {
 
 
+    }
+
+    public void setID(int id){
+        self.setID(id);
     }
 
 }

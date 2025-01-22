@@ -36,4 +36,7 @@ public class PlayerSelf extends Player { //You yourself, movement inputs, sendin
 
     }
 
+    public void setID(int id){this.id = id;}
+
+
 }

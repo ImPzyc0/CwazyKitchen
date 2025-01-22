@@ -21,4 +21,7 @@ public interface Constants {
     double LEFTBORDER = 200*SCALE;
     double RIGHTBORDER = 1000*SCALE;
 
+    String SERVERIP = "192.168.0.160";
+    int SERVERPORT = 6000;
+
 }
