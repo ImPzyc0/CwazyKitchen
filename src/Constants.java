@@ -2,7 +2,7 @@ import java.awt.*;
 
 public interface Constants {
 
-    int FPS = 120;
+    int FPS = 60;
 
     double SCALE = 1; //Größe des Bildschirms: 1 - 1200x800, NICHT PERFEKT!
 
@@ -21,7 +21,15 @@ public interface Constants {
     double LEFTBORDER = 200*SCALE;
     double RIGHTBORDER = 1000*SCALE;
 
-    String SERVERIP = "192.168.0.160";
+    String SERVERIP = "127.0.0.1";
     int SERVERPORT = 6000;
+
+    //Stations
+    //Grill
+    double GRILLX = 235*SCALE;
+    double GRILLY = 715*SCALE;
+    double GRILLSIZE = 120*SCALE;
+    Color GRILLCOLOR = Color.DARK_GRAY;
+    String GRILLSHORT = "GRL";
 
 }

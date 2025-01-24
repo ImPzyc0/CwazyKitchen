@@ -26,7 +26,7 @@ public class GameManager { //GameLoop, updates, Room, times
         util = new GUtility(width, height);
         util.getPanel().getWindow().setBgColor(backgroundColor);
 
-        kManager = new KitchenManager();
+        kManager = new KitchenManager(this);
         self = new PlayerSelf(new Vector2D((double) Constants.WIDTH / 2, (double) Constants.HEIGHT / 2), util, new Vector2D(Constants.PLAYERSIZE, Constants.PLAYERSIZE), Constants.PLAYERCOLOR, true, 0, "Self");
 
         this.client = new KitchenClient(this);
@@ -127,6 +127,10 @@ public class GameManager { //GameLoop, updates, Room, times
 
     public void setID(int id){
         self.setID(id);
+    }
+
+    public GUtility getUtil() {
+        return util;
     }
 
 }
