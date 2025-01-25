@@ -32,4 +32,10 @@ public interface Constants {
     Color GRILLCOLOR = Color.DARK_GRAY;
     String GRILLSHORT = "GRL";
 
+    //Romm Join UI
+    String GETROOMS = "Show open rooms";
+    String JOINROOM = "Join Room!";
+    String ROOMCODE = "Join Room with code...";
+    String CREATEROOM = "Create new Room";
+
 }

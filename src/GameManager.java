@@ -3,40 +3,45 @@ import com.daniel.GSprite.Util.GUtility;
 import com.daniel.GSprite.Util.Vector2D;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GameManager { //GameLoop, updates, Room, times
+public class GameManager extends Client{ //GameLoop, updates, Room, times
 
     private final int FPS;
     private final GUtility util;
 
-    private final KitchenManager kManager;
-    private final PlayerSelf self;
-    private final List<Player> players = new List<Player>();
+    private KitchenManager kManager;
+    private PlayerSelf self;
+    private int id;
+    private final List<Player> players = new ArrayList<>();
 
-    private final KitchenClient client;
 
     private boolean w, a, s, d = false;
 
+    private Button getrooms;
+    private Button createroom;
+    private Button joinroom;
+    private TextField field;
+    private TextArea area;
+
+    private int roomCode = -1;
+    private GameManager manager = this;
+
     public GameManager(int fps, int width, int height, Color backgroundColor) {
+        super(Constants.SERVERIP, Constants.SERVERPORT);
         FPS = fps;
         util = new GUtility(width, height);
         util.getPanel().getWindow().setBgColor(backgroundColor);
 
-        kManager = new KitchenManager(this);
-        self = new PlayerSelf(new Vector2D((double) Constants.WIDTH / 2, (double) Constants.HEIGHT / 2), util, new Vector2D(Constants.PLAYERSIZE, Constants.PLAYERSIZE), Constants.PLAYERCOLOR, true, 0, "Self");
-
-        this.client = new KitchenClient(this);
-
-        setKitchen();
-        //setRoomScreen();
-
-
-        gameLoop();
-
+        //setKitchen();
+        setRoomScreen();
 
     }
 
@@ -109,6 +114,8 @@ public class GameManager { //GameLoop, updates, Room, times
 
     private void setKitchen() { //Setting the scenery, stations etc.
 
+        kManager = new KitchenManager(this);
+
         RectangleColoredHitboxSprite leftWall = new RectangleColoredHitboxSprite(new Vector2D(Constants.WIDTH / 7.5, (double) Constants.HEIGHT / 2), util, new Vector2D((double) Constants.WIDTH / 37.5, Constants.HEIGHT * 1.01), Color.BLACK, true);
         RectangleColoredHitboxSprite rightWall = new RectangleColoredHitboxSprite(new Vector2D((Constants.WIDTH / 7.5) * 6.5, (double) Constants.HEIGHT / 2), util, new Vector2D((double) Constants.WIDTH / 37.5, Constants.HEIGHT * 1.01), Color.BLACK, true);
         RectangleColoredHitboxSprite topWall = new RectangleColoredHitboxSprite(new Vector2D((double) Constants.WIDTH / 2, Constants.HEIGHT - (double) Constants.HEIGHT / 25 / 3), util, new Vector2D((double) (Constants.WIDTH / 3) * 2 + (double) Constants.WIDTH / 15, (double) Constants.HEIGHT / 25), Color.BLACK, true);
@@ -118,19 +125,126 @@ public class GameManager { //GameLoop, updates, Room, times
         topWall.setActive(false);
         bottomWall.setActive(false);
 
+        self = new PlayerSelf(new Vector2D((double) Constants.WIDTH / 2, (double) Constants.HEIGHT / 2), util, new Vector2D(Constants.PLAYERSIZE, Constants.PLAYERSIZE), Constants.PLAYERCOLOR, true, id, "Self");
+
+        gameLoop();
     }
+
 
     private void setRoomScreen() {
 
+        getrooms = new Button();
+        getrooms.setLabel(Constants.GETROOMS);
+        getrooms.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
+        getrooms.setBackground(Color.DARK_GRAY);
+        getrooms.setLocation(Constants.WIDTH/10, Constants.HEIGHT/5*3);
+        getrooms.setFont(new Font("", 0, 50));
+        createroom = new Button();
+        createroom.setLabel(Constants.CREATEROOM);
+        createroom.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
+        createroom.setBackground(Color.DARK_GRAY);
+        createroom.setLocation(Constants.WIDTH/10, Constants.HEIGHT/5*2);
+        createroom.setFont(new Font("", 0, 50));
+        joinroom = new Button();
+        joinroom.setLabel(Constants.JOINROOM);
+        joinroom.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
+        joinroom.setBackground(Color.DARK_GRAY);
+        joinroom.setLocation(Constants.WIDTH/10, Constants.HEIGHT/5);
+        joinroom.setFont(new Font("", 0, 50));
+
+        getrooms.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                KitchenSend.GETROOMS.send(manager);
+            }
+        });
+
+        createroom.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                KitchenSend.CREATE.send(manager);
+            }
+        });
+
+        joinroom.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int i = -1;
+                //Check value of the Field
+                try{
+                    i = Integer.parseInt(field.getText());
+                }catch (NumberFormatException x){
+                    field.setText("Roomcodes are numbers!");
+                }
+
+                KitchenSend.JROOM.send(manager, i);
+            }
+        });
+
+        //Input for the roomcode to join
+        field = new TextField();
+        field.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
+        field.setBackground(Color.WHITE);
+        field.setText(Constants.ROOMCODE);
+        field.setLocation(Constants.WIDTH/10, Constants.HEIGHT/22);
+        field.setFont(new Font("", 2, 45));
+        //Text area with the codes
+        area = new TextArea(null,0,0,TextArea.SCROLLBARS_VERTICAL_ONLY);
+        area.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
+        area.setBackground(Color.WHITE);
+        area.setText("");
+        area.setLocation(Constants.WIDTH/10, Constants.HEIGHT/5*4);
+        area.setFont(new Font("", 4, 30));
+        area.setEditable(false);
+
+        util.getPanel().addComponent(joinroom);
+        util.getPanel().addComponent(getrooms);
+        util.getPanel().addComponent(createroom);
+        util.getPanel().addComponent(field);
+        util.getPanel().addComponent(area);
 
     }
 
     public void setID(int id){
-        self.setID(id);
+        this.id = id;
     }
 
     public GUtility getUtil() {
         return util;
     }
 
+    public TextArea getArea() {
+        return area;
+    }
+
+    public void joinRoom(int code){
+
+        roomCode = code;
+        deactivateRoomUI();
+        setKitchen();
+
+    }
+
+    private void deactivateRoomUI(){
+
+        getrooms.setVisible(false);
+        createroom.setVisible(false);
+        joinroom.setVisible(false);
+        field.setVisible(false);
+        area.setVisible(false);
+
+    }
+
+    @Override
+    public void processMessage(String pMessage) {
+        try{
+            KitchenHandle.valueOf(pMessage.substring(1).split(" ")[0]).handleMessage(this, pMessage);
+
+        }catch(IllegalArgumentException x){
+
+            System.out.println("Unhandled: "+pMessage);
+        }
+
+
+    }
 }

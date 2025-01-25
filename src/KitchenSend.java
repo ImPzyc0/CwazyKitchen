@@ -1,0 +1,35 @@
+import java.util.Arrays;
+
+public enum KitchenSend{
+
+    JOIN {
+        @Override
+        public void send(Client client, Object... data) {
+            client.send(this+" Daniel");
+        }
+    },
+    GETROOMS {
+        @Override
+        public void send(Client client, Object... data) {
+            client.send(this.toString());
+        }
+    },CREATE {
+        @Override
+        public void send(Client client, Object... data) {
+            client.send(this.toString());
+        }
+    },
+    JROOM{
+        @Override
+        public void send(Client client, Object... data) {
+            Object[] d = Arrays.stream(data).toArray();
+            int l = (int) d[0];
+            client.send(this+" "+l);
+        }
+    };
+
+
+    public abstract void send(Client client, Object... data);
+
+
+}
