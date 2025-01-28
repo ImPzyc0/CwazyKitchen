@@ -4,15 +4,14 @@ import com.daniel.GSprite.Util.Vector2D;
 
 import java.awt.*;
 
-public class Grill extends Station{
-
-    public Grill(Vector2D position, GUtility util) {
-        super(position, util, new Vector2D(Constants.GRILLSIZE, Constants.GRILLSIZE), Constants.GRILLCOLOR, true);
+public class Ticket extends Station{
+    public Ticket(Vector2D position, GUtility util, int number) {
+        super(position, util, new Vector2D(Constants.TICKET1SIZE, Constants.TICKET1SIZE), Constants.TICKET1COLOR, true);
     }
 
     @Override
     public void leftclick(Player player) {
-        
+
     }
 
     @Override
@@ -32,6 +31,6 @@ public class Grill extends Station{
 
     @Override
     public String getInteractionName() {
-        return Constants.GRILLSHORT;
+        return Constants.TICKET1SHORT;
     }
 }

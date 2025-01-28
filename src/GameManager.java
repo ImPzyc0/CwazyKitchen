@@ -14,7 +14,6 @@ import java.util.TimerTask;
 
 public class GameManager extends Client{ //GameLoop, updates, Room, times
 
-    private final int FPS;
     private final GUtility util;
 
     private KitchenManager kManager;
@@ -33,15 +32,16 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
 
     private int roomCode = -1;
     private GameManager manager = this;
+    private boolean connectedToServer = false;
 
-    public GameManager(int fps, int width, int height, Color backgroundColor) {
+    public GameManager(GUtility util) {
+
         super(Constants.SERVERIP, Constants.SERVERPORT);
-        FPS = fps;
-        util = new GUtility(width, height);
-        util.getPanel().getWindow().setBgColor(backgroundColor);
-
+        this.util = util;
         //setKitchen();
-        setRoomScreen();
+        //setRoomScreen();
+        setLoadingScreen();
+
 
     }
 
@@ -109,7 +109,7 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
                 util.draw();
 
             }
-        }, 0, 1000 / FPS);
+        }, 0, 1000 / Constants.FPS);
     }
 
     private void setKitchen() { //Setting the scenery, stations etc.
@@ -128,29 +128,37 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
         self = new PlayerSelf(new Vector2D((double) Constants.WIDTH / 2, (double) Constants.HEIGHT / 2), util, new Vector2D(Constants.PLAYERSIZE, Constants.PLAYERSIZE), Constants.PLAYERCOLOR, true, id, "Self");
 
         gameLoop();
+
+        util.getPanel().title("Name: Daniel, ID: "+self.getId()+", room: "+roomCode);
+    }
+
+    private void setLoadingScreen(){
+
+        util.getPanel().text((double) Constants.WIDTH /5, (double) Constants.HEIGHT /2, Constants.WAITINGSCREEN, new Font("", 0, Constants.FONTSIZE), Color.BLACK, Color.GRAY);
+
     }
 
 
-    private void setRoomScreen() {
+    public void setRoomScreen() {
 
         getrooms = new Button();
         getrooms.setLabel(Constants.GETROOMS);
         getrooms.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
         getrooms.setBackground(Color.DARK_GRAY);
         getrooms.setLocation(Constants.WIDTH/10, Constants.HEIGHT/5*3);
-        getrooms.setFont(new Font("", 0, 50));
+        getrooms.setFont(new Font("", 0, Constants.FONTSIZE));
         createroom = new Button();
         createroom.setLabel(Constants.CREATEROOM);
         createroom.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
         createroom.setBackground(Color.DARK_GRAY);
         createroom.setLocation(Constants.WIDTH/10, Constants.HEIGHT/5*2);
-        createroom.setFont(new Font("", 0, 50));
+        createroom.setFont(new Font("", 0, Constants.FONTSIZE));
         joinroom = new Button();
         joinroom.setLabel(Constants.JOINROOM);
         joinroom.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
         joinroom.setBackground(Color.DARK_GRAY);
         joinroom.setLocation(Constants.WIDTH/10, Constants.HEIGHT/5);
-        joinroom.setFont(new Font("", 0, 50));
+        joinroom.setFont(new Font("", 0, Constants.FONTSIZE));
 
         getrooms.addActionListener(new ActionListener() {
             @Override
@@ -175,6 +183,7 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
                     i = Integer.parseInt(field.getText());
                 }catch (NumberFormatException x){
                     field.setText("Roomcodes are numbers!");
+                    return;
                 }
 
                 KitchenSend.JROOM.send(manager, i);
@@ -187,14 +196,14 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
         field.setBackground(Color.WHITE);
         field.setText(Constants.ROOMCODE);
         field.setLocation(Constants.WIDTH/10, Constants.HEIGHT/22);
-        field.setFont(new Font("", 2, 45));
+        field.setFont(new Font("", 2, Constants.FONTSIZE/10*9));
         //Text area with the codes
         area = new TextArea(null,0,0,TextArea.SCROLLBARS_VERTICAL_ONLY);
         area.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
         area.setBackground(Color.WHITE);
         area.setText("");
         area.setLocation(Constants.WIDTH/10, Constants.HEIGHT/5*4);
-        area.setFont(new Font("", 4, 30));
+        area.setFont(new Font("", 4, Constants.FONTSIZE/5*3));
         area.setEditable(false);
 
         util.getPanel().addComponent(joinroom);
@@ -246,5 +255,9 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
         }
 
 
+    }
+
+    public KitchenManager getKitchenManager() {
+        return kManager;
     }
 }

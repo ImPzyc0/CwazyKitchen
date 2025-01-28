@@ -13,7 +13,8 @@ public enum KitchenSend{
         public void send(Client client, Object... data) {
             client.send(this.toString());
         }
-    },CREATE {
+    },
+    CREATE {
         @Override
         public void send(Client client, Object... data) {
             client.send(this.toString());

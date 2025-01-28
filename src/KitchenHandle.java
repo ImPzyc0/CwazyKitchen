@@ -11,7 +11,7 @@ public enum KitchenHandle {
         @Override
         public void handleMessage(GameManager client, String message) {
             client.setID(Integer.parseInt(message.substring(8)));
-
+            client.setRoomScreen();
         }
     },
     GROOM {
@@ -48,7 +48,8 @@ public enum KitchenHandle {
         public void handleMessage(GameManager client, String message) {
             //Name und ID des Spielers
             String[] str = message.split(" ");
-            System.out.println(str[1] +" : " + str[2]);
+
+            client.getKitchenManager().addPlayer(Integer.parseInt(str[2]), str[1]);
         }
     },
     ERR {

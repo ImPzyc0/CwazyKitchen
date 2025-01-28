@@ -4,15 +4,14 @@ import com.daniel.GSprite.Util.Vector2D;
 
 import java.awt.*;
 
-public class Grill extends Station{
-
-    public Grill(Vector2D position, GUtility util) {
-        super(position, util, new Vector2D(Constants.GRILLSIZE, Constants.GRILLSIZE), Constants.GRILLCOLOR, true);
+public class Fry extends Station{
+    public Fry(Vector2D position, GUtility util) {
+        super(position, util, new Vector2D(Constants.FRY1SIZE, Constants.FRY1SIZE), Constants.FRY1COLOR, true);
     }
 
     @Override
     public void leftclick(Player player) {
-        
+
     }
 
     @Override

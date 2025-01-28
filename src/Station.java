@@ -16,9 +16,6 @@ public abstract class Station extends RectangleColoredHitboxSprite {
 
     }
 
-    public Station(Vector2D position, GPanel panel, Vector2D hitboxSize, Color color, boolean fill) {
-        super(position, panel, hitboxSize, color, fill);
-    }
 
     public Station(Vector2D position, GUtility util, Vector2D hitboxSize, Color color, boolean fill) {
         super(position, util, hitboxSize, color, fill);

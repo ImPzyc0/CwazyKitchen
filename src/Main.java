@@ -53,6 +53,9 @@ public class Main {
         */
         //The surroundings of the kitchen
 
-       gManager = new GameManager(Constants.FPS, Constants.WIDTH, Constants.HEIGHT, Constants.BACKGROUNDCOLOR);
+        GUtility util = new GUtility(Constants.WIDTH, Constants.HEIGHT);
+        util.getPanel().getWindow().setBgColor(Constants.BACKGROUNDCOLOR);
+
+       gManager = new GameManager(util);
     }
 }
