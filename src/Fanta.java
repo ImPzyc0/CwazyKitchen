@@ -10,4 +10,8 @@ public class Fanta extends Drink{
     }
 
 
+    @Override
+    public String getInteractionName() {
+        return Constants.FANTASHORT;
+    }
 }

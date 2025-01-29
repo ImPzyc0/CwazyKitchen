@@ -9,4 +9,8 @@ public class Coke extends Drink{
         super(position, util, new Vector2D(Constants.COKESIZE, Constants.COKESIZE), Constants.COKECOLOR, true);
     }
 
+    @Override
+    public String getInteractionName() {
+        return Constants.COKESHORT;
+    }
 }

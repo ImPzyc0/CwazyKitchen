@@ -1,12 +1,12 @@
-import ch.aplu.util.GPanel;
 import com.daniel.GSprite.Util.GUtility;
 import com.daniel.GSprite.Util.Vector2D;
 
-import java.awt.*;
-
 public class Fry extends Station{
-    public Fry(Vector2D position, GUtility util) {
-        super(position, util, new Vector2D(Constants.FRY1SIZE, Constants.FRY1SIZE), Constants.FRY1COLOR, true);
+    private final int number;
+
+    public Fry(Vector2D position, GUtility util, int number) {
+        super(position, util, new Vector2D(Constants.FRYSIZE, Constants.FRYSIZE), Constants.FRYCOLOR, true);
+        this.number = number;
     }
 
     @Override
@@ -31,6 +31,6 @@ public class Fry extends Station{
 
     @Override
     public String getInteractionName() {
-        return Constants.GRILLSHORT;
+        return Constants.FRYSHORT +String.valueOf(number);
     }
 }

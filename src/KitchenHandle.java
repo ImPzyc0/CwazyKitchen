@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public enum KitchenHandle {
 
 
@@ -41,6 +43,15 @@ public enum KitchenHandle {
             client.joinRoom(Integer.parseInt(str[1]));
 
             //Alle anderen Spieler sind danach im String mit Name und ID
+
+            for(int i = 2; i<str.length; i++){
+                String[] s = str[i].split(",");
+                int id = Integer.parseInt(s[1]);
+                String name = s[0];
+                client.getKitchenManager().addPlayer(id, name);
+            }
+
+
         }
     },
     NPLAYER {
@@ -50,6 +61,18 @@ public enum KitchenHandle {
             String[] str = message.split(" ");
 
             client.getKitchenManager().addPlayer(Integer.parseInt(str[2]), str[1]);
+        }
+    },
+    POS {
+        @Override
+        public void handleMessage(GameManager client, String message) {
+            //id, x, y
+            String[] l = message.split(" ");
+            int id = Integer.parseInt(l[1]);
+            int x = Integer.parseInt(l[2].split(",")[0]);
+            int y = Integer.parseInt(l[2].split(",")[1]);
+
+            client.getKitchenManager().updatePlayerPos(id, x, y);
         }
     },
     ERR {

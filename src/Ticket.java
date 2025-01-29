@@ -1,12 +1,12 @@
-import ch.aplu.util.GPanel;
 import com.daniel.GSprite.Util.GUtility;
 import com.daniel.GSprite.Util.Vector2D;
 
-import java.awt.*;
-
 public class Ticket extends Station{
+    private final int number;
+
     public Ticket(Vector2D position, GUtility util, int number) {
-        super(position, util, new Vector2D(Constants.TICKET1SIZE, Constants.TICKET1SIZE), Constants.TICKET1COLOR, true);
+        super(position, util, new Vector2D(Constants.TICKETSIZE, Constants.TICKETSIZE), Constants.TICKETCOLOR, true);
+        this.number = number;
     }
 
     @Override
@@ -31,6 +31,6 @@ public class Ticket extends Station{
 
     @Override
     public String getInteractionName() {
-        return Constants.TICKET1SHORT;
+        return Constants.TICKETSHORT+number;
     }
 }

@@ -9,8 +9,11 @@ public class PlayerSelf extends Player { //You yourself, movement inputs, sendin
         super(position, util, hitboxSize, color, fill, id, name);
     }
 
-    public void updateMovement(boolean w, boolean a, boolean s, boolean d) {
-        //Würde normalerweise ein '? : ;' benutzen aber darf ich ja nicht also der hässliche Code
+    public void updateMovement(boolean w, boolean a, boolean s, boolean d, Client client) {
+        //Würde normalerweise ein '? : ;' benutzen aber darf ich ja nicht (glaube ich) also der hässliche Code
+        int startx = (int) this.getPosition().getX();
+        int starty = (int) this.getPosition().getY();
+
         double x = 0;
         double y = 0;
         if (w) y = Constants.MOVEMENTSPEED;
@@ -33,6 +36,10 @@ public class PlayerSelf extends Player { //You yourself, movement inputs, sendin
         if (position.getY() < Constants.BOTTOMBORDER) {
             position.setY(Constants.BOTTOMBORDER);
         }
+        if(startx != (int) this.getPosition().getX() || starty != (int) this.getPosition().getY()){
+            KitchenSend.MOVE.send(client, (int) this.getPosition().getX(), (int) this.getPosition().getY());
+        }
+
 
     }
 

@@ -31,6 +31,6 @@ public class Pizzaoven extends Station{
 
     @Override
     public String getInteractionName() {
-        return Constants.GRILLSHORT;
+        return Constants.PIZZASHORT;
     }
 }

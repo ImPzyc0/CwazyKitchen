@@ -27,6 +27,15 @@ public enum KitchenSend{
             int l = (int) d[0];
             client.send(this+" "+l);
         }
+    },
+    MOVE{
+        @Override
+        public void send(Client client, Object... data) {
+            Object[] d = Arrays.stream(data).toArray();
+            int x = (int) d[0];
+            int y = (int) d[1];
+            client.send(this+" "+x+","+y);
+        }
     };
 
 

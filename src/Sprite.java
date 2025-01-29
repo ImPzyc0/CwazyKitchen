@@ -10,4 +10,8 @@ public class Sprite extends Drink{
     }
 
 
+    @Override
+    public String getInteractionName() {
+        return Constants.SPRITESHORT;
+    }
 }

@@ -4,13 +4,12 @@ public interface Constants {
 
     int FPS = 60;
 
-    double SCALE = 1; //Größe des Bildschirms: 1 - 1200x800, NICHT PERFEKT!
+    double SCALE = 0.6; //Größe des Bildschirms: 1 - 1200x800, NICHT PERFEKT!
 
     int WIDTH = (int) (1200*SCALE);
     int HEIGHT = (int) (800*SCALE);
 
     int PLAYERSIZE = (int) (51*SCALE);
-    int PLAYERPERROOM = 2;
     Color[] PLAYERCOLORS = new Color[]{Color.BLUE, Color.GREEN, Color.YELLOW};
 
     Color PLAYERCOLOR = Color.RED;
@@ -28,75 +27,71 @@ public interface Constants {
 
     //Stations
     //Grill
-    double GRILLX = 235*SCALE;
-    double GRILLY = 715*SCALE;
-    double GRILLSIZE = 120*SCALE;
+    double GRILLX = 270*SCALE;
+    double GRILLY = 680*SCALE;
+    double GRILLSIZE = 120*1.5*SCALE;
     Color GRILLCOLOR = Color.DARK_GRAY;
     String GRILLSHORT = "GRL";
     //Fry
-    double FRY1X = 235*SCALE;
-    double FRY1Y = 715*SCALE;
-    double FRY1SIZE = 120*SCALE;
-    Color FRY1COLOR = Color.ORANGE;
-    String FRY1SHORT = "FRY1";
+    double FRY1X = 410*SCALE;
+    double FRY1Y = 725*SCALE;
+    double FRYSIZE = 60*1.5*SCALE;
+    Color FRYCOLOR = Color.ORANGE;
+    String FRYSHORT = "FRY";
     //Fry2pos
-    double FRY2X = 235*SCALE;
-    double FRY2Y = 715*SCALE;
-    String FRY2SHORT = "FRY2";
+    double FRY2X = 505*SCALE;
+    double FRY2Y = 725*SCALE;
     //Coke
-    double COKEX = 235*SCALE;
-    double COKEY = 715*SCALE;
-    double COKESIZE = 120*SCALE;
+    double COKEX = 600*SCALE;
+    double COKEY = 725*SCALE;
+    double COKESIZE = 60*1.5*SCALE;
     Color COKECOLOR = Color.BLACK;
     String COKESHORT = "COKE";
     //Sprite
-    double SPRITEX = 235*SCALE;
-    double SPRITEY = 715*SCALE;
-    double SPRITESIZE = 120*SCALE;
+    double SPRITEX = 695*SCALE;
+    double SPRITEY = 725*SCALE;
+    double SPRITESIZE = 60*1.5*SCALE;
     Color SPRITECOLOR = Color.LIGHT_GRAY;
     String SPRITESHORT = "SPR";
     //Pizzaoven
-    double PIZZAX = 235*SCALE;
-    double PIZZAY = 715*SCALE;
-    double PIZZASIZE = 120*SCALE;
+    double PIZZAX = 920*SCALE;
+    double PIZZAY = 695*SCALE;
+    double PIZZASIZE = 100*1.5*SCALE;
     Color PIZZACOLOR = Color.PINK;
     String PIZZASHORT = "PIZ";
     //Fanta
-    double FANTAX = 235*SCALE;
-    double FANTAY = 715*SCALE;
-    double FANTASIZE = 120*SCALE;
+    double FANTAX = 790*SCALE;
+    double FANTAY = 725*SCALE;
+    double FANTASIZE = 60*1.5*SCALE;
     Color FANTACOLOR = new Color(254,231,70);
     String FANTASHORT = "FAN";
     //Tray
-    double TRAYLX = 235*SCALE;
-    double TRAYY = 715*SCALE;
-    double TRAYSIZE = 120*SCALE;
+    double TRAYX = 900*SCALE;
+    double TRAYY = 130*SCALE;
+    double TRAYSIZE = 200*SCALE;
     Color TRAYCOLOR = Color.CYAN;
     String TRAYSHORT = "TRAY";
     //Customers
-    double CUSTOMX = 235*SCALE;
-    double CUSTOMY = 715*SCALE;
-    double CUSTOMSIZE = 120*SCALE;
+    double CUSTOMX = 600*SCALE;
+    double CUSTOMY = 120*SCALE;
+    double CUSTOMSIZE = 180*SCALE;
     Color CUSTOMCOLOR = new Color(155, 38, 38);
     String CUSTOMSHORT = "CUST";
     //Ticket 1
     double TICKET1X = 235*SCALE;
-    double TICKET1Y = 715*SCALE;
-    double TICKET1SIZE = 120*SCALE;
-    Color TICKET1COLOR = new Color(46, 187, 40);
-    String TICKET1SHORT = "TICK1";
+    double TICKET1Y = 80*SCALE;
+    double TICKETSIZE = 100*SCALE;
+    Color TICKETCOLOR = new Color(46, 187, 40);
+    String TICKETSHORT = "TICK";
     //Ticket 2
-    double TICKET2X = 235*SCALE;
-    double TICKET2Y = 715*SCALE;
-    String TICKET2SHORT = "TICK2";
+    double TICKET2X = 340*SCALE;
+    double TICKET2Y = 80*SCALE;
     //Ticket 3
     double TICKET3X = 235*SCALE;
-    double TICKET3Y = 715*SCALE;
-    String TICKET3SHORT = "TICK3";
+    double TICKET3Y = 185*SCALE;
     //Ticket 4
-    double TICKET4X = 235*SCALE;
-    double TICKET4Y = 715*SCALE;
-    String TICKET4SHORT = "TICK4";
+    double TICKET4X = 340*SCALE;
+    double TICKET4Y = 185*SCALE;
 
 
     //Romm Join UI

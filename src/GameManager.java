@@ -101,7 +101,7 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
 
                 //Movement before the listeners to detect new collisions
                 //If multiple buttons were pressed they will all be detected during a frame
-                self.updateMovement(w, a, s, d);
+                self.updateMovement(w, a, s, d, manager);
 
                 util.updateHitboxListeners();
 
@@ -251,7 +251,7 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
 
         }catch(IllegalArgumentException x){
 
-            System.out.println("Unhandled: "+pMessage);
+            System.out.println("Unhandled:"+pMessage);
         }
 
 
