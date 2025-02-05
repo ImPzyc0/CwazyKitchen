@@ -4,12 +4,12 @@ public interface Constants {
 
     int FPS = 60;
 
-    double SCALE = 0.6; //Größe des Bildschirms: 1 - 1200x800, NICHT PERFEKT!
+    double SCALE = 0.4; //Größe des Bildschirms: 1 - 1200x800, NICHT PERFEKT!
 
     int WIDTH = (int) (1200*SCALE);
     int HEIGHT = (int) (800*SCALE);
 
-    int PLAYERSIZE = (int) (51*SCALE);
+    int PLAYERSIZE = (int) (35*SCALE);
     Color[] PLAYERCOLORS = new Color[]{Color.BLUE, Color.GREEN, Color.YELLOW};
 
     Color PLAYERCOLOR = Color.RED;

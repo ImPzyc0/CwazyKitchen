@@ -3,10 +3,7 @@ import com.daniel.GSprite.Util.GUtility;
 import com.daniel.GSprite.Util.Vector2D;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -23,7 +20,7 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
     private final List<Player> players = new ArrayList<>();
 
 
-    private boolean w, a, s, d = false;
+    private boolean w, a, s, d, e, left, right = false;
 
     private Button getrooms;
     private Button createroom;
@@ -51,14 +48,41 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
 
         Timer timer = new Timer();
 
-        util.getPanel().addKeyListener(new KeyListener() {
+        util.getPanel().addMouseListener(new MouseListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
+            public void mouseClicked(MouseEvent e) {
+
             }
 
             @Override
-            public void keyPressed(KeyEvent e) {
-                switch (e.getKeyChar()) {
+            public void mousePressed(MouseEvent e) {
+                left = true;
+                right = true;
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
+        util.getPanel().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent event) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent event) {
+                switch (event.getKeyChar()) {
                     case 'w':
                         w = true;
                         break;
@@ -71,14 +95,17 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
                     case 'd':
                         d = true;
                         break;
+                    case 'e':
+                        e = false;
+                        break;
                     default:
                         break;
                 }
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-                switch (e.getKeyChar()) {
+            public void keyReleased(KeyEvent event) {
+                switch (event.getKeyChar()) {
                     case 'w':
                         w = false;
                         break;
@@ -90,6 +117,9 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
                         break;
                     case 'd':
                         d = false;
+                        break;
+                    case 'e':
+                        e = false;
                         break;
                     default:
                         break;
@@ -104,7 +134,12 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
                 //Movement before the listeners to detect new collisions
                 //If multiple buttons were pressed they will all be detected during a frame
                 self.updateMovement(w, a, s, d, manager);
+                if(self.getStationsCurrentlyIn().size() == 1){
+                    kManager.interaction(self.getStationsCurrentlyIn().getFirst(), left, right, e);
+                }
 
+                left = false;
+                right = false;
                 util.updateHitboxListeners();
 
                 util.getPanel().clear();
@@ -137,7 +172,6 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
     private void setLoadingScreen(){
 
         util.getPanel().text((double) Constants.WIDTH /5, (double) Constants.HEIGHT /2, Constants.WAITINGSCREEN, new Font("", 0, Constants.FONTSIZE), Color.BLACK, Color.GRAY);
-
     }
 
 

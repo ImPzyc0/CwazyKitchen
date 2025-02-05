@@ -46,6 +46,7 @@ public class KitchenManager {
 
         //Sends to the server
 
+
     }
     //Change the state of the Station accordingly; Only the station, the player will be handled elsewhere!
     public void handleInteraction(Station station, boolean leftclick, boolean rightclick, boolean epressed){
@@ -57,8 +58,6 @@ public class KitchenManager {
 
         Player player = new Player(new Vector2D((double) Constants.WIDTH / 2, (double) Constants.HEIGHT / 2), manager.getUtil(), new Vector2D(Constants.PLAYERSIZE, Constants.PLAYERSIZE), Constants.PLAYERCOLORS[playersInRoom.size()], true, id, name);
         playersInRoom.add(player);
-
-
     }
 
     public void updatePlayerPos(int id, int x, int y){

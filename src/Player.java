@@ -24,4 +24,11 @@ public class Player extends RectangleColoredHitboxSprite {//A player as shown in
     public String getName() {
         return name;
     }
+
+    @Override
+    public void draw() {
+        super.draw();
+
+        util.getPanel().text(this.position.getX()-Constants.PLAYERSIZE/2, this.position.getY()+(Constants.PLAYERSIZE/2+Constants.PLAYERSIZE/8),name, new Font("", 0, Constants.PLAYERSIZE/2), Color.BLACK, null);
+    }
 }
