@@ -103,4 +103,9 @@ public interface Constants {
 
     int FONTSIZE = (int) (50*SCALE);
 
+    //Login screen
+    String LOGIN = "Connect to server!";
+    String LABELLOGINSCREEN = "Put in your name, port and ip of the server to connect";
+    String DEFAULTNAME = "Player";
+
 }

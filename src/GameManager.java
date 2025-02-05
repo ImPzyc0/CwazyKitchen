@@ -18,6 +18,7 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
 
     private KitchenManager kManager;
     private PlayerSelf self;
+    private final String name;
     private int id;
     private final List<Player> players = new ArrayList<>();
 
@@ -34,10 +35,11 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
     private GameManager manager = this;
     private boolean connectedToServer = false;
 
-    public GameManager(GUtility util) {
+    public GameManager(GUtility util, String ip, int port, String name) {
 
-        super(Constants.SERVERIP, Constants.SERVERPORT);
+        super(ip, port);
         this.util = util;
+        this.name = name;
         //setKitchen();
         //setRoomScreen();
         setLoadingScreen();
@@ -109,7 +111,7 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
                 util.draw();
 
             }
-        }, 0, 1000 / Constants.FPS);
+        }, 200, 1000 / Constants.FPS);
     }
 
     private void setKitchen() { //Setting the scenery, stations etc.
@@ -125,11 +127,11 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
         topWall.setActive(false);
         bottomWall.setActive(false);
 
-        self = new PlayerSelf(new Vector2D((double) Constants.WIDTH / 2, (double) Constants.HEIGHT / 2), util, new Vector2D(Constants.PLAYERSIZE, Constants.PLAYERSIZE), Constants.PLAYERCOLOR, true, id, "Self");
+        self = new PlayerSelf(new Vector2D((double) Constants.WIDTH / 2, (double) Constants.HEIGHT / 2), util, new Vector2D(Constants.PLAYERSIZE, Constants.PLAYERSIZE), Constants.PLAYERCOLOR, true, id, name);
 
         gameLoop();
 
-        util.getPanel().title("Name: Daniel, ID: "+self.getId()+", room: "+roomCode);
+        util.getPanel().title("Name: "+name+", ID: "+self.getId()+", room: "+roomCode);
     }
 
     private void setLoadingScreen(){
@@ -259,5 +261,13 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
 
     public KitchenManager getKitchenManager() {
         return kManager;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public PlayerSelf getPlayerself() {
+        return self;
     }
 }

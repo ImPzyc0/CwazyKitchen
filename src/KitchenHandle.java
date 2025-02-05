@@ -6,7 +6,7 @@ public enum KitchenHandle {
     CONNECTED {
         @Override
         public void handleMessage(GameManager client, String message) {
-            KitchenSend.JOIN.send(client, "Daniel");
+            KitchenSend.JOIN.send(client);
         }
     },
     JOINED {
@@ -61,6 +61,7 @@ public enum KitchenHandle {
             String[] str = message.split(" ");
 
             client.getKitchenManager().addPlayer(Integer.parseInt(str[2]), str[1]);
+            client.getPlayerself().sendMove(client);
         }
     },
     POS {

@@ -31,6 +31,6 @@ public class Customers extends Station{
 
     @Override
     public String getInteractionName() {
-        return Constants.GRILLSHORT;
+        return Constants.CUSTOMSHORT;
     }
 }

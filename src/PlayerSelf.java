@@ -10,7 +10,6 @@ public class PlayerSelf extends Player { //You yourself, movement inputs, sendin
     }
 
     public void updateMovement(boolean w, boolean a, boolean s, boolean d, Client client) {
-        //Würde normalerweise ein '? : ;' benutzen aber darf ich ja nicht (glaube ich) also der hässliche Code
         int startx = (int) this.getPosition().getX();
         int starty = (int) this.getPosition().getY();
 
@@ -19,7 +18,7 @@ public class PlayerSelf extends Player { //You yourself, movement inputs, sendin
         if (w) y = Constants.MOVEMENTSPEED;
         if (s) y = -Constants.MOVEMENTSPEED;
         if (a) x = -Constants.MOVEMENTSPEED;
-        if (d) x = +Constants.MOVEMENTSPEED;
+        if (d) x = Constants.MOVEMENTSPEED;
         move(new Vector2D(x, y));
 
         //Check Bounds
@@ -37,13 +36,14 @@ public class PlayerSelf extends Player { //You yourself, movement inputs, sendin
             position.setY(Constants.BOTTOMBORDER);
         }
         if(startx != (int) this.getPosition().getX() || starty != (int) this.getPosition().getY()){
-            KitchenSend.MOVE.send(client, (int) this.getPosition().getX(), (int) this.getPosition().getY());
+            sendMove(client);
         }
 
 
     }
 
-    public void setID(int id){this.id = id;}
-
+    public void sendMove(Client client){
+        KitchenSend.MOVE.send(client, (int) this.getPosition().getX(), (int) this.getPosition().getY());
+    }
 
 }

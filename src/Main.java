@@ -3,10 +3,13 @@ import com.daniel.GSprite.Util.GUtility;
 import com.daniel.GSprite.Util.Vector2D;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Main {
 
-    public static GameManager gManager;
+    private static GameManager gManager;
+
 
     public static void main(String[] args) {
        //Zum Aufbau von meiner Aplu-Library, damit der Code der GPanelSpriteApi Sinn ergibt
@@ -56,6 +59,66 @@ public class Main {
         GUtility util = new GUtility(Constants.WIDTH, Constants.HEIGHT);
         util.getPanel().getWindow().setBgColor(Constants.BACKGROUNDCOLOR);
 
-       gManager = new GameManager(util);
+
+        setLoginScreen(util);
+
+    }
+
+    private static void setLoginScreen(GUtility util){
+
+        Label loginlabel = new Label();
+        loginlabel.setText(Constants.LABELLOGINSCREEN);
+        loginlabel.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
+        loginlabel.setLocation(Constants.WIDTH/10, Constants.HEIGHT/7);
+        loginlabel.setFont(new Font("", 0, (int) (Constants.FONTSIZE/(1.5))));
+
+        Button login = new Button();
+        login.setLabel(Constants.LOGIN);
+        login.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
+        login.setBackground(Color.DARK_GRAY);
+        login.setLocation(Constants.WIDTH/10, Constants.HEIGHT/7*5);
+        login.setFont(new Font("", 0, Constants.FONTSIZE));
+
+        TextField port = new TextField();
+        port.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
+        port.setBackground(Color.WHITE);
+        port.setText(String.valueOf(Constants.SERVERPORT));
+        port.setLocation(Constants.WIDTH/10, Constants.HEIGHT/7*3);
+        port.setFont(new Font("", 2, Constants.FONTSIZE/10*9));
+
+        TextField ip = new TextField();
+        ip.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
+        ip.setBackground(Color.WHITE);
+        ip.setText(Constants.SERVERIP);
+        ip.setLocation(Constants.WIDTH/10, Constants.HEIGHT/7*4);
+        ip.setFont(new Font("", 2, Constants.FONTSIZE/10*9));
+
+        TextField name = new TextField();
+        name.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
+        name.setBackground(Color.WHITE);
+        name.setText(Constants.DEFAULTNAME);
+        name.setLocation(Constants.WIDTH/10, Constants.HEIGHT/7*2);
+        name.setFont(new Font("", 2, Constants.FONTSIZE/10*9));
+
+        login.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                login.setVisible(false);
+                ip.setVisible(false);
+                port.setVisible(false);
+                name.setVisible(false);
+                loginlabel.setVisible(false);
+                gManager = new GameManager(util, ip.getText(), Integer.parseInt(port.getText()), name.getText());
+
+            }
+        });
+
+        util.getPanel().addComponent(port);
+        util.getPanel().addComponent(ip);
+        util.getPanel().addComponent(login);
+        util.getPanel().addComponent(name);
+        util.getPanel().addComponent(loginlabel);
+
+
     }
 }

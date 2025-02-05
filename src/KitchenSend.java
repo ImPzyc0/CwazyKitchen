@@ -5,7 +5,7 @@ public enum KitchenSend{
     JOIN {
         @Override
         public void send(Client client, Object... data) {
-            client.send(this+" Daniel");
+            client.send(this+" "+((GameManager)client).getName());
         }
     },
     GETROOMS {

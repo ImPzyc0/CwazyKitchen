@@ -21,5 +21,7 @@ public class Player extends RectangleColoredHitboxSprite {//A player as shown in
         return id;
     }
 
-
+    public String getName() {
+        return name;
+    }
 }
