@@ -22,6 +22,8 @@ public class KitchenManager {
 
     private final List<Player> playersInRoom = new ArrayList<Player>();
 
+    private boolean active = false;
+
     public KitchenManager(GameManager manager){
         grill = new Grill(new Vector2D(Constants.GRILLX, Constants.GRILLY), manager.getUtil());
         fry1 = new Fry(new Vector2D(Constants.FRY1X, Constants.FRY1Y), manager.getUtil(), 1);
@@ -71,4 +73,8 @@ public class KitchenManager {
 
     }
 
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }

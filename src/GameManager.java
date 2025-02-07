@@ -32,6 +32,8 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
     private GameManager manager = this;
     private boolean connectedToServer = false;
 
+    private Timer gameloop;
+
     public GameManager(GUtility util, String ip, int port, String name) {
 
         super(ip, port);
@@ -46,7 +48,7 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
 
     private void gameLoop() {
 
-        Timer timer = new Timer();
+        gameloop = new Timer();
 
         util.getPanel().addMouseListener(new MouseListener() {
             @Override
@@ -127,7 +129,7 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
             }
         });
 
-        timer.scheduleAtFixedRate(new TimerTask() {
+        gameloop.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
 
@@ -174,6 +176,54 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
         util.getPanel().text((double) Constants.WIDTH /5, (double) Constants.HEIGHT /2, Constants.WAITINGSCREEN, new Font("", 0, Constants.FONTSIZE), Color.BLACK, Color.GRAY);
     }
 
+    public void giveRoomCountdown(){
+
+        Timer timer = new Timer();
+
+        final int[] times = {0};
+
+        Label label = new Label();
+        label.setText(Constants.GAMESTARTSIN+(5-times[0]));
+        label.setSize(Constants.WIDTH/5*4, Constants.HEIGHT/7);
+        label.setLocation(Constants.WIDTH/5, Constants.HEIGHT/2);
+        label.setFont(new Font("", 0, (int) (Constants.FONTSIZE/(1.5))));
+        util.getPanel().addComponent(label);
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+
+                times[0]++;
+
+                label.setText(Constants.GAMESTARTSIN+(5-times[0]));
+
+                if(times[0] == 5){label.setVisible(false); this.cancel();}
+            }
+        }, 0, 1000);
+
+    }
+
+    public void startRoom(){
+
+        kManager.setActive(true);
+
+        Label label = new Label();
+        label.setText(Constants.GAMESTART);
+        label.setSize(Constants.WIDTH/5*2, Constants.HEIGHT/7);
+        label.setLocation(Constants.WIDTH/5, Constants.HEIGHT/2);
+        label.setFont(new Font("", Font.BOLD, (int) (Constants.FONTSIZE/(1.5))));
+        util.getPanel().addComponent(label);
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                label.setVisible(false);
+
+            }
+        }, 2000);
+
+    }
 
     public void setRoomScreen() {
 
@@ -303,5 +353,29 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
 
     public PlayerSelf getPlayerself() {
         return self;
+    }
+
+    public void closeGame(String reason){
+
+        gameloop.cancel();
+
+        Label label = new Label();
+        label.setText(reason.equals("LEAVE") ? Constants.GAMECLOSEDUETOPLAYERLEAVE : Constants.GAMECLOSEDUETOGAMEEND);
+        label.setSize(Constants.WIDTH/10*8, Constants.HEIGHT/7);
+        label.setLocation(Constants.WIDTH/10, Constants.HEIGHT/2);
+        label.setFont(new Font("", Font.BOLD, (int) (Constants.FONTSIZE/(1.5))));
+        util.getPanel().addComponent(label);
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                label.setVisible(false);
+                System.exit(0);
+
+            }
+        }, 3000);
+
     }
 }

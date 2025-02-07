@@ -108,4 +108,10 @@ public interface Constants {
     String LABELLOGINSCREEN = "Put in your name, port and ip of the server to connect";
     String DEFAULTNAME = "Player";
 
+    String GAMESTARTSIN = "Game starts in: ";
+    String GAMESTART = "Game has started!";
+
+    String GAMECLOSEDUETOPLAYERLEAVE = "Game has ended due to a player leaving.";
+    String GAMECLOSEDUETOGAMEEND = "Game has ended.";
+
 }

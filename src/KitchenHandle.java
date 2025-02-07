@@ -76,6 +76,29 @@ public enum KitchenHandle {
             client.getKitchenManager().updatePlayerPos(id, x, y);
         }
     },
+    ROOMSTARTSOON {
+        @Override
+        public void handleMessage(GameManager client, String message) {
+            client.giveRoomCountdown();
+
+        }
+    },
+
+    ROOMSTART {
+        @Override
+        public void handleMessage(GameManager client, String message) {
+            client.startRoom();
+
+        }
+    },
+    ROOMCLOSE{
+        @Override
+        public void handleMessage(GameManager client, String message) {
+            System.out.println("End");
+            client.closeGame(message.split(" ")[1]);
+
+        }
+    },
     ERR {
         @Override
         public void handleMessage(GameManager client, String message) {
