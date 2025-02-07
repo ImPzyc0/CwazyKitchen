@@ -22,6 +22,8 @@ public class KitchenManager {
 
     private final List<Player> playersInRoom = new ArrayList<Player>();
 
+    private boolean active = false;
+
     public KitchenManager(GameManager manager){
         grill = new Grill(new Vector2D(Constants.GRILLX, Constants.GRILLY), manager.getUtil());
         fry1 = new Fry(new Vector2D(Constants.FRY1X, Constants.FRY1Y), manager.getUtil(), 1);
@@ -43,10 +45,13 @@ public class KitchenManager {
     //An Interaction in the game from Playerself
     //Only called once per frame, so any input will be sent at once
     public void interaction(Station station, boolean leftclick, boolean rightclick, boolean epressed){
-
         //Sends to the server
 
+        //System.out.println("Station: "+station.getInteractionName()+ ", l: "+leftclick+", r: "+rightclick+", e: "+epressed);
 
+        if(leftclick){station.leftclick(manager.getPlayerself());}
+        if(rightclick){station.rightclick(manager.getPlayerself());}
+        if(epressed){station.throwaway(manager.getPlayerself());}
     }
     //Change the state of the Station accordingly; Only the station, the player will be handled elsewhere!
     public void handleInteraction(Station station, boolean leftclick, boolean rightclick, boolean epressed){
@@ -69,6 +74,10 @@ public class KitchenManager {
             }
         }
 
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
 }

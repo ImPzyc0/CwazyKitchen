@@ -25,12 +25,27 @@ public class Fry extends Station{
     }
 
     @Override
-    public void cold(Player player) {
+    public String getInteractionName() {
+        return Constants.FRYSHORT +String.valueOf(number);
+    }
+
+    @Override
+    public void cooked(int pos) {
 
     }
 
     @Override
-    public String getInteractionName() {
-        return Constants.FRYSHORT +String.valueOf(number);
+    public void cold(int pos) {
+
+    }
+
+    @Override
+    protected int getCooktime() {
+        return Constants.FRYCOOKTIME;
+    }
+
+    @Override
+    protected int getColdtime() {
+        return Constants.FRYCOLDTIME;
     }
 }

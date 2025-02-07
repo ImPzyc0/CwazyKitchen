@@ -13,4 +13,22 @@ public class Coke extends Drink{
     public String getInteractionName() {
         return Constants.COKESHORT;
     }
+
+    @Override
+    public void draw() {
+        super.draw();
+
+        util.getPanel().text(this.position.getX()- hitboxSize.getX() /2, this.position.getY(),getInteractionName(), new Font("", 0, (int) (hitboxSize.getX() /4)), Color.WHITE, null);
+
+    }
+
+    @Override
+    public void cooked(int pos) {
+
+    }
+
+    @Override
+    public void cold(int pos) {
+
+    }
 }

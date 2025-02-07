@@ -1,4 +1,3 @@
-import ch.aplu.util.GPanel;
 import com.daniel.GSprite.Util.GUtility;
 import com.daniel.GSprite.Util.Vector2D;
 
@@ -25,12 +24,27 @@ public class Drink extends Station{
     }
 
     @Override
-    public void cold(Player player) {
+    public String getInteractionName() {
+        return null;
+    }
+
+    @Override
+    public void cooked(int pos) {
 
     }
 
     @Override
-    public String getInteractionName() {
-        return null;
+    public void cold(int pos) {
+
+    }
+
+    @Override
+    protected int getCooktime() {
+        return Constants.COKECOOKTIME;
+    }
+
+    @Override
+    protected int getColdtime() {
+        return Constants.COKECOLDTIME;
     }
 }

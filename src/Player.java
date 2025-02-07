@@ -29,6 +29,6 @@ public class Player extends RectangleColoredHitboxSprite {//A player as shown in
     public void draw() {
         super.draw();
 
-        util.getPanel().text(this.position.getX()-Constants.PLAYERSIZE/2, this.position.getY()+(Constants.PLAYERSIZE/2+Constants.PLAYERSIZE/8),name, new Font("", 0, Constants.PLAYERSIZE/2), Color.BLACK, null);
+        util.getPanel().text(this.position.getX()- (double) Constants.PLAYERSIZE /2, this.position.getY()+((double) Constants.PLAYERSIZE /2+ (double) Constants.PLAYERSIZE /8),name, new Font("", 0, Constants.PLAYERSIZE/2), Color.BLACK, null);
     }
 }

@@ -14,4 +14,14 @@ public class Fanta extends Drink{
     public String getInteractionName() {
         return Constants.FANTASHORT;
     }
+
+    @Override
+    public void cooked(int pos) {
+
+    }
+
+    @Override
+    public void cold(int pos) {
+
+    }
 }

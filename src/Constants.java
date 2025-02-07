@@ -4,7 +4,7 @@ public interface Constants {
 
     int FPS = 60;
 
-    double SCALE = 0.4; //Größe des Bildschirms: 1 - 1200x800, NICHT PERFEKT!
+    double SCALE = 0.6; //Größe des Bildschirms: 1 - 1200x800, NICHT PERFEKT!
 
     int WIDTH = (int) (1200*SCALE);
     int HEIGHT = (int) (800*SCALE);
@@ -32,12 +32,21 @@ public interface Constants {
     double GRILLSIZE = 120*1.5*SCALE;
     Color GRILLCOLOR = Color.DARK_GRAY;
     String GRILLSHORT = "GRL";
+    int GRILLCOOKTIME = 3000;
+    int GRILLCOLDTIME = 1500;
+
+    Color PATTYCOOKING = new Color(255, 220, 220);
+    Color PATTYDONE = new Color(175, 91, 91);
+    Color PATTYCOLD = new Color(62, 37, 37);
+
     //Fry
     double FRY1X = 410*SCALE;
     double FRY1Y = 725*SCALE;
     double FRYSIZE = 60*1.5*SCALE;
     Color FRYCOLOR = Color.ORANGE;
     String FRYSHORT = "FRY";
+    int FRYCOOKTIME = 3000;
+    int FRYCOLDTIME = 1500;
     //Fry2pos
     double FRY2X = 505*SCALE;
     double FRY2Y = 725*SCALE;
@@ -47,6 +56,8 @@ public interface Constants {
     double COKESIZE = 60*1.5*SCALE;
     Color COKECOLOR = Color.BLACK;
     String COKESHORT = "COKE";
+    int COKECOOKTIME = 3000;
+    int COKECOLDTIME = 1500;
     //Sprite
     double SPRITEX = 695*SCALE;
     double SPRITEY = 725*SCALE;
@@ -59,6 +70,8 @@ public interface Constants {
     double PIZZASIZE = 100*1.5*SCALE;
     Color PIZZACOLOR = Color.PINK;
     String PIZZASHORT = "PIZ";
+    int PIZZACOOKTIME = 3000;
+    int PIZZACOLDTIME = 1500;
     //Fanta
     double FANTAX = 790*SCALE;
     double FANTAY = 725*SCALE;
@@ -107,5 +120,11 @@ public interface Constants {
     String LOGIN = "Connect to server!";
     String LABELLOGINSCREEN = "Put in your name, port and ip of the server to connect";
     String DEFAULTNAME = "Player";
+
+    String GAMESTARTSIN = "Game starts in: ";
+    String GAMESTART = "Game has started!";
+
+    String GAMECLOSEDUETOPLAYERLEAVE = "Game has ended due to a player leaving.";
+    String GAMECLOSEDUETOGAMEEND = "Game has ended.";
 
 }

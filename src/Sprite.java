@@ -14,4 +14,14 @@ public class Sprite extends Drink{
     public String getInteractionName() {
         return Constants.SPRITESHORT;
     }
+
+    @Override
+    public void cooked(int pos) {
+
+    }
+
+    @Override
+    public void cold(int pos) {
+
+    }
 }

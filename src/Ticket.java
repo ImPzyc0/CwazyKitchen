@@ -25,12 +25,27 @@ public class Ticket extends Station{
     }
 
     @Override
-    public void cold(Player player) {
+    public String getInteractionName() {
+        return Constants.TICKETSHORT+number;
+    }
+
+    @Override
+    public void cooked(int pos) {
 
     }
 
     @Override
-    public String getInteractionName() {
-        return Constants.TICKETSHORT+number;
+    public void cold(int pos) {
+
+    }
+
+    @Override
+    protected int getCooktime() {
+        return 0;
+    }
+
+    @Override
+    protected int getColdtime() {
+        return 0;
     }
 }

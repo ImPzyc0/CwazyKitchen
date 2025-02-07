@@ -108,8 +108,7 @@ public class Main {
                 port.setVisible(false);
                 name.setVisible(false);
                 loginlabel.setVisible(false);
-                gManager = new GameManager(util, ip.getText(), Integer.parseInt(port.getText()), name.getText());
-
+                gManager = new GameManager(util, ip.getText(), Integer.parseInt(port.getText()), name.getText().replace(' ', '_'));
             }
         });
 

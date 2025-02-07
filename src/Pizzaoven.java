@@ -1,8 +1,5 @@
-import ch.aplu.util.GPanel;
 import com.daniel.GSprite.Util.GUtility;
 import com.daniel.GSprite.Util.Vector2D;
-
-import java.awt.*;
 
 public class Pizzaoven extends Station{
     public Pizzaoven(Vector2D position, GUtility util) {
@@ -25,12 +22,27 @@ public class Pizzaoven extends Station{
     }
 
     @Override
-    public void cold(Player player) {
+    public String getInteractionName() {
+        return Constants.PIZZASHORT;
+    }
+
+    @Override
+    public void cooked(int pos) {
 
     }
 
     @Override
-    public String getInteractionName() {
-        return Constants.PIZZASHORT;
+    public void cold(int pos) {
+
+    }
+
+    @Override
+    protected int getCooktime() {
+        return Constants.PIZZACOOKTIME;
+    }
+
+    @Override
+    protected int getColdtime() {
+        return Constants.PIZZACOLDTIME;
     }
 }

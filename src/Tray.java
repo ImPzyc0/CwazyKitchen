@@ -1,8 +1,5 @@
-import ch.aplu.util.GPanel;
 import com.daniel.GSprite.Util.GUtility;
 import com.daniel.GSprite.Util.Vector2D;
-
-import java.awt.*;
 
 public class Tray extends Station{
     public Tray(Vector2D position, GUtility util) {
@@ -25,12 +22,27 @@ public class Tray extends Station{
     }
 
     @Override
-    public void cold(Player player) {
+    public String getInteractionName() {
+        return Constants.TRAYSHORT;
+    }
+
+    @Override
+    public void cooked(int pos) {
 
     }
 
     @Override
-    public String getInteractionName() {
-        return Constants.TRAYSHORT;
+    public void cold(int pos) {
+
+    }
+
+    @Override
+    protected int getCooktime() {
+        return 0;
+    }
+
+    @Override
+    protected int getColdtime() {
+        return 0;
     }
 }
