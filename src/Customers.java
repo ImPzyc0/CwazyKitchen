@@ -1,13 +1,15 @@
 import com.daniel.GSprite.Util.GUtility;
 import com.daniel.GSprite.Util.Vector2D;
 
-public class Customers extends Station{
+public class Customers extends Station {
     public Customers(Vector2D position, GUtility util) {
-        super(position, util, new Vector2D(Constants.CUSTOMSIZE, Constants.CUSTOMSIZE), Constants.CUSTOMCOLOR, true);
+        super(position, util, new Vector2D(Constants.CUSTOMSIZE, Constants.CUSTOMSIZE), Constants.CUSTOMCOLOR, true, Constants.CUSTOMSHORT);
     }
 
     @Override
     public void leftclick(Player player) {
+
+
 
     }
 
@@ -21,28 +23,4 @@ public class Customers extends Station{
 
     }
 
-    @Override
-    public String getInteractionName() {
-        return Constants.CUSTOMSHORT;
-    }
-
-    @Override
-    public void cooked(int pos) {
-
-    }
-
-    @Override
-    public void cold(int pos) {
-
-    }
-
-    @Override
-    protected int getCooktime() {
-        return 0;
-    }
-
-    @Override
-    protected int getColdtime() {
-        return 0;
-    }
 }

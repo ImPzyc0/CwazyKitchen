@@ -2,14 +2,12 @@ import com.daniel.GSprite.Util.GUtility;
 import com.daniel.GSprite.Util.Vector2D;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.ConcurrentHashMap;
 
-public class Grill extends Station{
+public class Grill extends CookStation {
 
-    public Grill(Vector2D position, GUtility util) {
-        super(position, util, new Vector2D(Constants.GRILLSIZE, Constants.GRILLSIZE), Constants.GRILLCOLOR, true);
+    public Grill(Vector2D position, GUtility util, Vector2D hitboxSize, Color color, boolean fill, String cooking, String done, String cold, String name, int cooktime, int coldtime) {
+        super(position,  util,  hitboxSize,  color,  fill,  cooking,  done,  cold,  name,  cooktime, coldtime);
         //Jeweils für eine Position auf dem Grill
         patties.put(0, new StateWrap(State.EMPTY, 0));
         patties.put(1, new StateWrap(State.EMPTY, 0));
@@ -38,7 +36,6 @@ public class Grill extends Station{
                 patties.put(i, new StateWrap(State.COOKING, amountOfPatties));
                 amountOfPatties++;
                 callWhenCooked(i);
-                System.out.println(i);
                 return;
 
             }
@@ -66,14 +63,10 @@ public class Grill extends Station{
 
     }
 
-    @Override
-    public String getInteractionName() {
-        return Constants.GRILLSHORT;
-    }
 
     @Override
     public void cooked(int pos) {
-        if(patties.get(pos).getState() == State.EMPTY){return;}
+        if(patties.get(pos).getState() != State.COOKING){return;}
         callWhenCold(pos);
 
         patties.get(pos).setState(State.DONE);
@@ -81,20 +74,11 @@ public class Grill extends Station{
 
     @Override
     public void cold(int pos) {
-        if(patties.get(pos).getState() == State.EMPTY){return;}
+        if(patties.get(pos).getState() != State.DONE){return;}
 
         patties.get(pos).setState(State.COLD);
     }
 
-    @Override
-    protected int getCooktime() {
-        return Constants.GRILLCOOKTIME;
-    }
-
-    @Override
-    protected int getColdtime() {
-        return Constants.GRILLCOLDTIME;
-    }
 
     @Override
     public void draw() {
@@ -141,4 +125,5 @@ public class Grill extends Station{
 
         return true;
     }
+
 }

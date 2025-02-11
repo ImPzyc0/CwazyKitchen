@@ -41,10 +41,9 @@ public enum KitchenSend{
         @Override
         public void send(Client client, Object... data) {
             Object[] d = Arrays.stream(data).toArray();
-            boolean left = (boolean) d[0];
-            boolean right = (boolean) d[1];
-            String station = (String) d[2];
-            client.send(this+" "+left+" "+right+" "+station);
+            boolean interaction = (boolean) d[0];
+            String station = (String) d[1];
+            client.send(this+" "+station+" "+interaction);
         }
     },;
 
