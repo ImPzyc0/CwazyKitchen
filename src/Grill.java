@@ -6,6 +6,29 @@ import java.util.HashMap;
 
 public class Grill extends CookStation {
 
+    protected class StateWrap{
+        private State state;
+        private final int numberOfPreviousPatties;
+
+        protected StateWrap(State state, int numberOfPreviousPatties){
+            this.state = state;
+            this.numberOfPreviousPatties = numberOfPreviousPatties;
+        }
+
+        public State getState() {
+            return state;
+        }
+
+        public void setState(State state) {
+            this.state = state;
+        }
+
+        public int getNumberOfPreviousPatties() {
+            return numberOfPreviousPatties;
+        }
+
+    }
+
     public Grill(Vector2D position, GUtility util, Vector2D hitboxSize, Color color, boolean fill, String cooking, String done, String cold, String name, int cooktime, int coldtime) {
         super(position,  util,  hitboxSize,  color,  fill,  cooking,  done,  cold,  name,  cooktime, coldtime);
         //Jeweils für eine Position auf dem Grill

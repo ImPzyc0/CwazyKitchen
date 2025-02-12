@@ -100,6 +100,29 @@ public enum KitchenHandle {
 
         }
     },
+    TICKET{
+        @Override
+        public void handleMessage(GameManager client, String message) {
+
+            String[] str = message.split(" ");
+
+            int number = Integer.parseInt(str[1])+1;
+
+            if(str[2].equals("n")){
+                String[] ticket = new String[str.length-3];
+                for (int i = 3; i < str.length; i++){
+                    ticket[i-3] = str[i];
+
+                }
+
+                client.getKitchenManager().setTicket(number, ticket);
+
+            }else{ // Money
+
+            }
+        }
+    },
+
     ERR {
         @Override
         public void handleMessage(GameManager client, String message) {

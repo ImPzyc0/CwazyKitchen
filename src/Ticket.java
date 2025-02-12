@@ -8,7 +8,9 @@ import java.awt.*;
 public class Ticket extends Station {
     private final int number;
 
-    private String ticketValue = null;
+    private String[] ticketValue = null;
+
+
 
     public Ticket(Vector2D position, GUtility util, int number) {
         super(position, util, new Vector2D(Constants.TICKETSIZE, Constants.TICKETSIZE), Constants.TICKETCOLOR, true, Constants.TICKETSHORT+" "+number);
@@ -17,7 +19,6 @@ public class Ticket extends Station {
 
     @Override
     public void leftclick(Player player) {
-
 
 
     }
@@ -37,17 +38,20 @@ public class Ticket extends Station {
         super.draw();
 
         if(ticketValue != null){
-            String[] things = ticketValue.split(" ");
-            for (int i = 0; i < things.length && i < 4; i++){
-                util.getPanel().text(this.position.getX()- hitboxSize.getX() /2, this.position.getY()- (hitboxSize.getY()/6*i),things[i], new Font("", 0, (int) (hitboxSize.getX() /6)), Color.BLACK, null);
+            for (int i = 0; i < ticketValue.length && i < 4; i++){
+                util.getPanel().text(this.position.getX()- hitboxSize.getX() /2, this.position.getY()- (hitboxSize.getY()/6*i),ticketValue[i], new Font("", 0, (int) (hitboxSize.getX() /6)), Color.BLACK, null);
 
             }
 
-            for (int i = 4; i < things.length && i < 8; i++){
-                util.getPanel().text(this.position.getX(), this.position.getY()- (hitboxSize.getY()/6*(i-4)),things[i], new Font("", 0, (int) (hitboxSize.getX() /6)), Color.BLACK, null);
+            for (int i = 4; i < ticketValue.length && i < 8; i++){
+                util.getPanel().text(this.position.getX(), this.position.getY()- (hitboxSize.getY()/6*(i-4)),ticketValue[i], new Font("", 0, (int) (hitboxSize.getX() /6)), Color.BLACK, null);
             }
 
         }
 
+    }
+
+    public void setTicketValue(String[] ticketValue) {
+        this.ticketValue = ticketValue;
     }
 }

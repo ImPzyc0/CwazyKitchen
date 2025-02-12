@@ -30,7 +30,7 @@ public class KitchenManager {
 
 
         tray = new Tray(new Vector2D(Constants.TRAYX, Constants.TRAYY), manager.getUtil());
-        customers = new Customers(new Vector2D(Constants.CUSTOMX, Constants.CUSTOMY), manager.getUtil());
+        customers = new Customers(new Vector2D(Constants.CUSTOMX, Constants.CUSTOMY), manager.getUtil(), manager);
         ticket1 = new Ticket(new Vector2D(Constants.TICKET1X, Constants.TICKET1Y), manager.getUtil(), 1);
         ticket2 = new Ticket(new Vector2D(Constants.TICKET2X, Constants.TICKET2Y), manager.getUtil(), 2);
         ticket3 = new Ticket(new Vector2D(Constants.TICKET3X, Constants.TICKET3Y), manager.getUtil(), 3);
@@ -41,7 +41,7 @@ public class KitchenManager {
 
     //An Interaction in the game from Playerself
     //Only called once per frame, so any input will be sent at once
-    public void interaction(CookStation station, boolean leftclick, boolean rightclick, boolean epressed){
+    public void interaction(Station station, boolean leftclick, boolean rightclick, boolean epressed){
         //Sends to the server
 
         //System.out.println("Station: "+station.getInteractionName()+ ", l: "+leftclick+", r: "+rightclick+", e: "+epressed);
@@ -51,7 +51,7 @@ public class KitchenManager {
         if(epressed){station.throwaway(manager.getPlayerself());}
     }
 
-    public void handleInteraction(CookStation station, boolean leftclick, boolean rightclick, boolean epressed){
+    public void handleInteraction(Station station, boolean leftclick, boolean rightclick, boolean epressed){
         //Change the state of the station
 
     }
@@ -75,6 +75,28 @@ public class KitchenManager {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+
+    public void setTicket(int ticket, String[] value){
+
+        switch(ticket){
+            case 1:
+                ticket1.setTicketValue(value);
+                break;
+            case 2:
+                ticket2.setTicketValue(value);
+                break;
+            case 3:
+                ticket3.setTicketValue(value);
+                break;
+            case 4:
+                ticket4.setTicketValue(value);
+                break;
+            default:
+                break;
+        }
+
     }
 
 }

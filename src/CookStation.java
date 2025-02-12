@@ -7,29 +7,6 @@ import java.awt.*;
 
 public class CookStation extends Station {
 
-    protected class StateWrap{
-        private State state;
-        private final int numberOfPreviousPatties;
-
-        protected StateWrap(State state, int numberOfPreviousPatties){
-            this.state = state;
-            this.numberOfPreviousPatties = numberOfPreviousPatties;
-        }
-
-        public State getState() {
-            return state;
-        }
-
-        public void setState(State state) {
-            this.state = state;
-        }
-
-        public int getNumberOfPreviousPatties() {
-            return numberOfPreviousPatties;
-        }
-
-    }
-
     protected enum State{
         EMPTY,
         COOKING,

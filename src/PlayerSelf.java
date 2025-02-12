@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PlayerSelf extends Player { //You yourself, movement inputs, sending them to the server etc.
 
-    private final List<CookStation> stationsCurrentlyIn = new ArrayList<CookStation>();
+    private final List<Station> stationsCurrentlyIn = new ArrayList<Station>();
 
     public PlayerSelf(Vector2D position, GUtility util, Vector2D hitboxSize, Color color, boolean fill, int id, String name) {
         super(position, util, hitboxSize, color, fill, id, name);
@@ -18,8 +18,8 @@ public class PlayerSelf extends Player { //You yourself, movement inputs, sendin
         this.setListener(new CollideEventListener() {
             @Override
             public void onHitboxEnter(HitboxSprite hitboxSprite) {
-                if(hitboxSprite instanceof CookStation){
-                    stationsCurrentlyIn.add((CookStation) hitboxSprite);
+                if(hitboxSprite instanceof Station){
+                    stationsCurrentlyIn.add((Station) hitboxSprite);
                 }
             }
 
@@ -30,8 +30,8 @@ public class PlayerSelf extends Player { //You yourself, movement inputs, sendin
 
             @Override
             public void onHitboxExit(HitboxSprite hitboxSprite) {
-                if(hitboxSprite instanceof CookStation){
-                    stationsCurrentlyIn.remove((CookStation) hitboxSprite);
+                if(hitboxSprite instanceof Station){
+                    stationsCurrentlyIn.remove((Station) hitboxSprite);
                 }
             }
         });
@@ -74,7 +74,7 @@ public class PlayerSelf extends Player { //You yourself, movement inputs, sendin
         KitchenSend.MOVE.send(client, (int) this.getPosition().getX(), (int) this.getPosition().getY());
     }
 
-    public List<CookStation> getStationsCurrentlyIn() {
+    public List<Station> getStationsCurrentlyIn() {
         return stationsCurrentlyIn;
     }
 }

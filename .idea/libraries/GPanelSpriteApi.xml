@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="GPanelSpriteApi">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../GPanelSpriteApi.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
