@@ -25,4 +25,8 @@ public abstract class Station extends RectangleColoredHitboxSprite {
         util.getPanel().text(this.position.getX()- hitboxSize.getX() /2, this.position.getY()+hitboxSize.getY()/4,name, new Font("", 0, (int) (hitboxSize.getX() /4)), Color.WHITE  , null);
 
     }
+
+    public String getName() {
+        return name;
+    }
 }

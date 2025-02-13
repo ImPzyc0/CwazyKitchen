@@ -99,7 +99,7 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
                         d = true;
                         break;
                     case 'e':
-                        e = false;
+                        e = true;
                         break;
                     default:
                         break;

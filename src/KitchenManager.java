@@ -21,8 +21,8 @@ public class KitchenManager {
     public KitchenManager(GameManager manager){
         grill = new Grill(new Vector2D(Constants.GRILLX, Constants.GRILLY), manager.getUtil(), new Vector2D(Constants.GRILLSIZE, Constants.GRILLSIZE), Constants.GRILLCOLOR, true, "", "", "", Constants.GRILLSHORT, Constants.GRILLCOOKTIME, Constants.GRILLCOLDTIME);
 
-        fry1 = new CookStation(new Vector2D(Constants.FRY1X, Constants.FRY1Y), manager.getUtil(), new Vector2D(Constants.FRYSIZE, Constants.FRYSIZE), Constants.FRYCOLOR, true, Constants.FRIESCOOKING, Constants.FRIESDONE, Constants.FRIESCOLD, Constants.FRYSHORT, Constants.FRYCOOKTIME, Constants.FRYCOLDTIME);
-        fry2 = new CookStation(new Vector2D(Constants.FRY2X, Constants.FRY2Y), manager.getUtil(), new Vector2D(Constants.FRYSIZE, Constants.FRYSIZE), Constants.FRYCOLOR, true, Constants.FRIESCOOKING, Constants.FRIESDONE, Constants.FRIESCOLD, Constants.FRYSHORT, Constants.FRYCOOKTIME, Constants.FRYCOLDTIME);
+        fry1 = new CookStation(new Vector2D(Constants.FRY1X, Constants.FRY1Y), manager.getUtil(), new Vector2D(Constants.FRYSIZE, Constants.FRYSIZE), Constants.FRYCOLOR, true, Constants.FRIESCOOKING, Constants.FRIESDONE, Constants.FRIESCOLD, Constants.FRYSHORT+"1", Constants.FRYCOOKTIME, Constants.FRYCOLDTIME);
+        fry2 = new CookStation(new Vector2D(Constants.FRY2X, Constants.FRY2Y), manager.getUtil(), new Vector2D(Constants.FRYSIZE, Constants.FRYSIZE), Constants.FRYCOLOR, true, Constants.FRIESCOOKING, Constants.FRIESDONE, Constants.FRIESCOLD, Constants.FRYSHORT+"2", Constants.FRYCOOKTIME, Constants.FRYCOLDTIME);
         sprite = new CookStation(new Vector2D(Constants.SPRITEX, Constants.SPRITEY), manager.getUtil(), new Vector2D(Constants.SPRITESIZE, Constants.SPRITESIZE), Constants.SPRITECOLOR, true, Constants.SPRITECOOKING, Constants.SPRITEDONE, Constants.SPRITECOLD, Constants.SPRITESHORT, Constants.SPRITECOOKTIME, Constants.SPRITECOLDTIME);
         coke = new CookStation(new Vector2D(Constants.COKEX, Constants.COKEY), manager.getUtil(), new Vector2D(Constants.COKESIZE, Constants.COKESIZE), Constants.COKECOLOR, true, Constants.COKECOOKING, Constants.COKEDONE, Constants.COKECOLD, Constants.COKESHORT, Constants.COKECOOKTIME, Constants.COKECOLDTIME);
         fanta = new CookStation(new Vector2D(Constants.FANTAX, Constants.FANTAY), manager.getUtil(), new Vector2D(Constants.FANTASIZE, Constants.FANTASIZE), Constants.FANTACOLOR, true, Constants.FANTACOOKING, Constants.FANTADONE, Constants.FANTACOLD, Constants.FANTASHORT, Constants.FANTACOOKTIME, Constants.FANTACOLDTIME);
@@ -40,19 +40,23 @@ public class KitchenManager {
     }
 
     //An Interaction in the game from Playerself
-    //Only called once per frame, so any input will be sent at once
     public void interaction(Station station, boolean leftclick, boolean rightclick, boolean epressed){
-        //Sends to the server
+        //Sends to the server; Remove local calls!
 
-        //System.out.println("Station: "+station.getInteractionName()+ ", l: "+leftclick+", r: "+rightclick+", e: "+epressed);
+        if(leftclick){station.leftclick(manager.getPlayerself()); KitchenSend.INT.send(manager, station.getName().replace(" ", ""), "l");}
+        if(rightclick){station.rightclick(manager.getPlayerself()); KitchenSend.INT.send(manager, station.getName().replace(" ", ""), "r");}
+        if(epressed){station.throwaway(manager.getPlayerself());KitchenSend.INT.send(manager, station.getName().replace(" ", ""), "e");}
 
-        if(leftclick){station.leftclick(manager.getPlayerself());}
-        if(rightclick){station.rightclick(manager.getPlayerself());}
-        if(epressed){station.throwaway(manager.getPlayerself());}
+
     }
 
     public void handleInteraction(Station station, boolean leftclick, boolean rightclick, boolean epressed){
         //Change the state of the station
+
+        if(leftclick){station.leftclick(manager.getPlayerself());}
+        if(rightclick){station.rightclick(manager.getPlayerself());}
+        if(epressed){station.throwaway(manager.getPlayerself());}
+
 
     }
 
