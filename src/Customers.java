@@ -10,22 +10,24 @@ public class Customers extends Station {
         this.manager = manager;
     }
 
+    //Methods useless as the station itself doesn`t ever change
+
     @Override
     public void leftclick(Player player) {
 
-        KitchenSend.INT.send(manager, Constants.CUSTOMSHORT, "l");
+
 
     }
 
     @Override
     public void rightclick(Player player) {
-        KitchenSend.INT.send(manager, Constants.CUSTOMSHORT, "r");
+
 
     }
 
     @Override
     public void throwaway(Player player) {
-        KitchenSend.INT.send(manager, Constants.CUSTOMSHORT, "e");
+
 
     }
 

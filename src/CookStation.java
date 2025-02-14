@@ -41,6 +41,7 @@ public class CookStation extends Station {
 
     @Override
     public void rightclick(Player player) {
+        if(player.hasTray()){return;}
         if(state == State.EMPTY){
             this.sprite = new RectangleImageHitboxSprite(position, util, new Vector2D(this.hitboxSize.getX()/5*4, this.hitboxSize.getX()/5*4), cooking);
 

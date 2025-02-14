@@ -42,21 +42,23 @@ public class KitchenManager {
     //An Interaction in the game from Playerself
     public void interaction(Station station, boolean leftclick, boolean rightclick, boolean epressed){
         //Sends to the server; Remove local calls!
-
-        if(leftclick){station.leftclick(manager.getPlayerself()); KitchenSend.INT.send(manager, station.getName().replace(" ", ""), "l");}
-        if(rightclick){station.rightclick(manager.getPlayerself()); KitchenSend.INT.send(manager, station.getName().replace(" ", ""), "r");}
-        if(epressed){station.throwaway(manager.getPlayerself());KitchenSend.INT.send(manager, station.getName().replace(" ", ""), "e");}
-
-
-    }
-
-    public void handleInteraction(Station station, boolean leftclick, boolean rightclick, boolean epressed){
-        //Change the state of the station
-
+        //HAS TO BE REMOVED!!
         if(leftclick){station.leftclick(manager.getPlayerself());}
         if(rightclick){station.rightclick(manager.getPlayerself());}
         if(epressed){station.throwaway(manager.getPlayerself());}
 
+        if(leftclick){KitchenSend.INT.send(manager, station.getName(), "l");}
+        if(rightclick){KitchenSend.INT.send(manager, station.getName(), "r");}
+        if(epressed){KitchenSend.INT.send(manager, station.getName(), "e");}
+
+    }
+
+    public void handleInteraction(Station station, boolean leftclick, boolean rightclick, boolean epressed, Player player){
+        //Change the state of the station
+
+        if(leftclick){station.leftclick(player);}
+        if(rightclick){station.rightclick(player);}
+        if(epressed){station.throwaway(player);}
 
     }
 

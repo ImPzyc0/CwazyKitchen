@@ -100,11 +100,13 @@ public enum KitchenHandle {
 
         }
     },
+    //Ticket is special as it also requires other information, but doesn`t need to trigger any clicks
     TICKET{
         @Override
         public void handleMessage(GameManager client, String message) {
 
             String[] str = message.split(" ");
+
 
             int number = Integer.parseInt(str[1])+1;
 

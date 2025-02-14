@@ -7,15 +7,15 @@ public class Tray extends Station {
         super(position, util, new Vector2D(Constants.TRAYSIZE, Constants.TRAYSIZE), Constants.TRAYCOLOR, true, Constants.TRAYSHORT);
     }
 
-
+    //Give player a tray
     @Override
     public void leftclick(Player player) {
-
+        player.removeTray();
     }
 
     @Override
     public void rightclick(Player player) {
-
+        player.giveTray();
     }
 
     @Override

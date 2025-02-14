@@ -67,6 +67,7 @@ public class PlayerSelf extends Player { //You yourself, movement inputs, sendin
             sendMove(client);
         }
 
+        updateTrayPosition(this.position, new Vector2D(startx, starty));
 
     }
 

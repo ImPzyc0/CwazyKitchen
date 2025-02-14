@@ -51,6 +51,7 @@ public class Grill extends CookStation {
 
     @Override
     public void rightclick(Player player) {
+        if(player.hasTray()){return;}
 
         for(int i = 0; i< patties.size(); i++){
 

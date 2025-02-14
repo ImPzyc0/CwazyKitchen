@@ -10,8 +10,9 @@ public interface Constants {
     int WIDTH = (int) (1200*SCALE);
     int HEIGHT = (int) (800*SCALE);
 
-    int PLAYERSIZE = (int) (35*SCALE);
+    int PLAYERSIZE = (int) (40*SCALE);
     Color[] PLAYERCOLORS = new Color[]{Color.BLUE, Color.GREEN, Color.YELLOW};
+    Color PLAYERTRAYCOLOR = new Color(200, 50, 50);
 
     Color PLAYERCOLOR = Color.RED;
     Color BACKGROUNDCOLOR = Color.GRAY;
