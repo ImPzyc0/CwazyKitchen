@@ -33,9 +33,17 @@ public class CookStation extends Station {
     } // A Singular station, their states
 
 
-
     @Override
     public void leftclick(Player player) {
+        if(!player.hasTray() || !player.trayHasSpace() || sprite == null){return;}
+        String str = switch (state) {
+            case DONE -> done;
+            case COOKING -> cooking;
+            case COLD -> cold;
+            default -> "";
+        };
+        player.addItem(str);
+
         throwaway(player);
     }
 

@@ -17,7 +17,6 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
     private PlayerSelf self;
     private final String name;
     private int id;
-    private final List<Player> players = new ArrayList<>();
 
 
     private boolean w, a, s, d, e, left, right = false;
@@ -31,7 +30,6 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
 
     private int roomCode = -1;
     private GameManager manager = this;
-    private boolean connectedToServer = false;
 
     private Timer gameloop;
 
@@ -172,7 +170,7 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
         topWall.setActive(false);
         bottomWall.setActive(false);
 
-        self = new PlayerSelf(new Vector2D((double) Constants.WIDTH / 2, (double) Constants.HEIGHT / 2), util, new Vector2D(Constants.PLAYERSIZE, Constants.PLAYERSIZE), Constants.PLAYERCOLOR, true, id, name);
+        self = new PlayerSelf(new Vector2D((double) Constants.WIDTH / 2, (double) Constants.HEIGHT / 2), util, new Vector2D(Constants.PLAYERSIZE, Constants.PLAYERSIZE), Constants.PLAYERS[0], id, name);
 
         gameLoop();
 
@@ -292,14 +290,14 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
 
     @Override
     public void processMessage(String pMessage) {
-        try{
-            KitchenHandle.valueOf(pMessage.substring(1).split(" ")[0]).handleMessage(this, pMessage);
+            try {
 
-        }catch(IllegalArgumentException x){
+                KitchenHandle.valueOf(pMessage.substring(1).split(" ")[0]).handleMessage(this, pMessage);
 
-            System.out.println("Unhandled:"+pMessage);
-        }
+            } catch (IllegalArgumentException x) {
 
+                System.out.println("Unhandled:" + pMessage);
+            }
 
     }
 

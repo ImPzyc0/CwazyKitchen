@@ -95,7 +95,7 @@ public enum KitchenHandle {
     ROOMCLOSE{
         @Override
         public void handleMessage(GameManager client, String message) {
-            System.out.println("End");
+            System.out.println("End.");
             client.closeGame(message.split(" ")[1]);
 
         }
@@ -124,7 +124,22 @@ public enum KitchenHandle {
             }
         }
     },
+    TRAY{
+        @Override
+        public void handleMessage(GameManager client, String message) {
+            String[] str = message.split(" ");
 
+            client.getKitchenManager().handleInteraction("Tray", str[2], str[1]);
+        }
+    },
+    INT{
+        @Override
+        public void handleMessage(GameManager client, String message) {
+            String[] str = message.split(" ");
+
+            client.getKitchenManager().handleInteraction(str[1], str[2], str[3]);
+        }
+    },
     ERR {
         @Override
         public void handleMessage(GameManager client, String message) {

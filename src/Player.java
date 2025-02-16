@@ -1,24 +1,22 @@
-import com.daniel.GSprite.Sprites.DrawableSprites.ColoredSprites.RectangleColoredHitboxSprite;
-import com.daniel.GSprite.Sprites.DrawableSprites.DrawableSprite;
+import com.daniel.GSprite.Sprites.DrawableSprites.ImageSprites.RectangleImageHitboxSprite;
 import com.daniel.GSprite.Sprites.PositionSprite;
 import com.daniel.GSprite.Util.GUtility;
 import com.daniel.GSprite.Util.Vector2D;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class Player extends RectangleColoredHitboxSprite {//A player as shown in the game, name id etc.
+public class Player extends RectangleImageHitboxSprite {//A player as shown in the game, name id etc.
 
     protected int id;
     private final String name;
     //Hashmap so it can have both Image and Colored sprites
-    protected HashMap<DrawableSprite, PositionSprite> trayItems = null;
+    protected List<RectangleImageHitboxSprite> trayItems = null;
 
 
-    public Player(Vector2D position, GUtility util, Vector2D hitboxSize, Color color, boolean fill, int id, String name) {
-        super(position, util, hitboxSize, color, fill);
+    public Player(Vector2D position, GUtility util, Vector2D hitboxSize, String path, int id, String name) {
+        super(position, util, hitboxSize, path);
 
         this.id = id;
         this.name = name;
@@ -34,17 +32,10 @@ public class Player extends RectangleColoredHitboxSprite {//A player as shown in
 
     @Override
     public void draw() {
+        if(image == null){return;}
         super.draw();
 
         util.getPanel().text(this.position.getX()- (double) Constants.PLAYERSIZE /2, this.position.getY()+((double) Constants.PLAYERSIZE /2+ (double) Constants.PLAYERSIZE /8),name, new Font("", 0, Constants.PLAYERSIZE/2), Color.BLACK, null);
-
-        //Tray
-        if(trayItems ==  null){return;}
-        for(DrawableSprite dsprite : trayItems.keySet()){
-
-            dsprite.draw();
-
-        }
 
     }
 
@@ -52,11 +43,16 @@ public class Player extends RectangleColoredHitboxSprite {//A player as shown in
         return trayItems != null;
     }
 
+    public boolean trayHasSpace(){
+        return trayItems.size() <= 9;
+    }
+
     public void giveTray(){
         if(hasTray()){return;}
-        this.trayItems = new HashMap<>();
-        RectangleColoredHitboxSprite spr = new RectangleColoredHitboxSprite(new Vector2D(this.position.getX()+hitboxSize.getX()/2, this.position.getY()+hitboxSize.getY()/2), util, new Vector2D(this.hitboxSize.getX(), this.hitboxSize.getY()), Constants.PLAYERTRAYCOLOR, true);
-        trayItems.put(spr, spr);
+
+        RectangleImageHitboxSprite spr = new RectangleImageHitboxSprite(new Vector2D(this.position.getX()+hitboxSize.getX(), this.position.getY()-hitboxSize.getY()/2), util, new Vector2D(this.hitboxSize.getX()*2, this.hitboxSize.getY()), Constants.PLAYERTRAY);
+        this.trayItems = new ArrayList<>();
+        trayItems.add(spr);
 
     }
 
@@ -65,62 +61,42 @@ public class Player extends RectangleColoredHitboxSprite {//A player as shown in
             return;
         }
 
-        switch(str){
-
-            case "Frier1":
-
-                break;
-            case "Frier2":
-                break;
-            case "Grill":
-                break;
-            case "Pizza":
-                break;
-            case "Coke":
-                break;
-            case "Sprite":
-                break;
-            case "Fanta":
-                break;
-            default:
-                break;
-        }
+        trayItems.add(new RectangleImageHitboxSprite(calculatePosOfItem(trayItems.size()), util, new Vector2D(hitboxSize.getX()/3, hitboxSize.getY()/3), str));
 
     }
 
-    private Vector2D calculatePosOfNewItem(){
+    private Vector2D calculatePosOfItem(int pos){
 
-        switch (trayItems.size()){
-
+        switch (pos){
+            case 1:
+                return new Vector2D(this.position.getX()+hitboxSize.getX() -(hitboxSize.getX()/4*3), this.position.getY()-hitboxSize.getY()/2+hitboxSize.getY()/4);
             case 2:
-                break;
+                return new Vector2D(this.position.getX()+hitboxSize.getX() -(hitboxSize.getX()/4), this.position.getY()-hitboxSize.getY()/2+hitboxSize.getY()/4);
             case 3:
-                break;
+                return new Vector2D(this.position.getX()+hitboxSize.getX() +(hitboxSize.getX()/4), this.position.getY()-hitboxSize.getY()/2+hitboxSize.getY()/4);
             case 4:
-                break;
+                return new Vector2D(this.position.getX()+hitboxSize.getX() +(hitboxSize.getX()/4*3), this.position.getY()-hitboxSize.getY()/2+hitboxSize.getY()/4);
             case 5:
-                break;
+                return new Vector2D(this.position.getX()+hitboxSize.getX() -(hitboxSize.getX()/4*3), this.position.getY()-hitboxSize.getY()/2-hitboxSize.getY()/4);
             case 6:
-                break;
+                return new Vector2D(this.position.getX()+hitboxSize.getX() -(hitboxSize.getX()/4), this.position.getY()-hitboxSize.getY()/2-hitboxSize.getY()/4);
             case 7:
-                break;
+                return new Vector2D(this.position.getX()+hitboxSize.getX() +(hitboxSize.getX()/4), this.position.getY()-hitboxSize.getY()/2-hitboxSize.getY()/4);
             case 8:
-                break;
-            case 9:
-                break;
+                return new Vector2D(this.position.getX()+hitboxSize.getX() +(hitboxSize.getX()/4*3), this.position.getY()-hitboxSize.getY()/2-hitboxSize.getY()/4);
+
             default:
                 break;
 
         }
 
-        return null;
+        return new Vector2D(0, 0);
     }
 
     public void removeTray(){
-
-        for(PositionSprite spr : trayItems.values()){
+        if(!hasTray()){return;}
+        for(PositionSprite spr : trayItems){
             spr.remove();
-
         }
 
         trayItems = null;
@@ -129,23 +105,20 @@ public class Player extends RectangleColoredHitboxSprite {//A player as shown in
 
     @Override
     public void setPosition(Vector2D vec) {
-       updateTrayPosition(vec, this.getPosition());
-
         super.setPosition(vec);
-
-
+        updateTrayPosition();
 
     }
 
-    protected void updateTrayPosition(Vector2D vec, Vector2D oldVec){
+    protected void updateTrayPosition(){
         if(!hasTray()){return;}
 
-        double x = -oldVec.getX() + vec.getX();
-        double y = -oldVec.getY() + vec.getY();
+        PositionSprite tray = trayItems.get(0);
+        tray.setPosition(new Vector2D(this.position.getX()+hitboxSize.getX(), this.position.getY()-hitboxSize.getY()/2));
 
-        for(PositionSprite pos : trayItems.values()){
+        for(int i = 1; i < trayItems.size(); i++){
 
-            pos.move(new Vector2D(x, y));
+            trayItems.get(i).setPosition(calculatePosOfItem(i));
 
         }
     }

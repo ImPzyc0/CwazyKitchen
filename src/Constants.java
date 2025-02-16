@@ -5,19 +5,17 @@ public interface Constants {
     int FPS = 60;
 
 
-    double SCALE = 1; //Größe des Bildschirms: 1 - 1200x800, NICHT PERFEKT!
+    double SCALE = 0.6; //Größe des Bildschirms: 1 - 1200x800, NICHT PERFEKT!
 
     int WIDTH = (int) (1200*SCALE);
     int HEIGHT = (int) (800*SCALE);
 
     int PLAYERSIZE = (int) (40*SCALE);
-    Color[] PLAYERCOLORS = new Color[]{Color.BLUE, Color.GREEN, Color.YELLOW};
-    Color PLAYERTRAYCOLOR = new Color(200, 50, 50);
-
-    Color PLAYERCOLOR = Color.RED;
+    String[] PLAYERS = new String[]{"spieler1.jpg", "spieler2.jpg", "spieler3.jpg", "spieler4.jpg"};
+    String PLAYERTRAY = "tray.jpg";
     Color BACKGROUNDCOLOR = Color.GRAY;
 
-    double MOVEMENTSPEED = 260/FPS;
+    double MOVEMENTSPEED = 260/FPS*SCALE;
 
     double TOPBORDER = 747*SCALE;
     double BOTTOMBORDER = 53*SCALE;
@@ -37,9 +35,9 @@ public interface Constants {
     int GRILLCOOKTIME = 3000;
     int GRILLCOLDTIME = 1500;
 
-    Color PATTYCOOKING = new Color(255, 220, 220);
-    Color PATTYDONE = new Color(175, 91, 91);
-    Color PATTYCOLD = new Color(62, 37, 37);
+    String PATTYCOOKING = "pattycooking.jpg";
+    String PATTYDONE = "pattydone.jpg";
+    String PATTYCOLD = "pattycold.jpg";
 
     //Fry
     double FRY1X = 410*SCALE;

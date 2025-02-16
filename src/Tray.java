@@ -20,6 +20,6 @@ public class Tray extends Station {
 
     @Override
     public void throwaway(Player player) {
-
+        player.removeTray();
     }
 }
