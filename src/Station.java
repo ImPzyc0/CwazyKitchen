@@ -6,6 +6,8 @@ import java.awt.*;
 
 public abstract class Station extends RectangleColoredHitboxSprite {
 
+    //Any interactable Station
+
     protected String name;
 
     public Station(Vector2D position, GUtility util, Vector2D hitboxSize, Color color, boolean fill, String name) {

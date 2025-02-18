@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 
 public class Main {
 
+    //Main class: Screen prior to the game starting and connecting to rooms
+
 
     public static void main(String[] args) {
        //Zum Aufbau von meiner Aplu-Library, damit der Code der GPanelSpriteApi Sinn ergibt

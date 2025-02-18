@@ -6,14 +6,11 @@ import java.util.*;
 import java.util.List;
 
 public class KitchenManager {
+
+    //Any kitchen-related info
+
     private final GameManager manager; //Updates all stations and their state, (has the Client!!)
 
-    private final CookStation fry1, fry2, coke, fanta, sprite, oven;
-
-    private final Grill grill;
-
-    private final Tray tray;
-    private final Customers customers;
     private final Ticket ticket1, ticket2, ticket3, ticket4;
 
     private final List<Player> playersInRoom = new ArrayList<Player>();
@@ -29,18 +26,18 @@ public class KitchenManager {
     private final Label timeLeftLabel = new Label();
 
     public KitchenManager(GameManager manager){
-        grill = new Grill(new Vector2D(Constants.GRILLX, Constants.GRILLY), manager.getUtil(), new Vector2D(Constants.GRILLSIZE, Constants.GRILLSIZE), Constants.GRILLCOLOR, true, Constants.PATTYCOOKING, Constants.PATTYDONE, Constants.PATTYCOLD, Constants.GRILLSHORT, Constants.GRILLCOOKTIME, Constants.GRILLCOLDTIME);
+        Grill grill = new Grill(new Vector2D(Constants.GRILLX, Constants.GRILLY), manager.getUtil(), new Vector2D(Constants.GRILLSIZE, Constants.GRILLSIZE), Constants.GRILLCOLOR, true, Constants.PATTYCOOKING, Constants.PATTYDONE, Constants.PATTYCOLD, Constants.GRILLSHORT, Constants.GRILLCOOKTIME, Constants.GRILLCOLDTIME);
 
-        fry1 = new CookStation(new Vector2D(Constants.FRY1X, Constants.FRY1Y), manager.getUtil(), new Vector2D(Constants.FRYSIZE, Constants.FRYSIZE), Constants.FRYCOLOR, true, Constants.FRIESCOOKING, Constants.FRIESDONE, Constants.FRIESCOLD, Constants.FRYSHORT+"1", Constants.FRYCOOKTIME, Constants.FRYCOLDTIME);
-        fry2 = new CookStation(new Vector2D(Constants.FRY2X, Constants.FRY2Y), manager.getUtil(), new Vector2D(Constants.FRYSIZE, Constants.FRYSIZE), Constants.FRYCOLOR, true, Constants.FRIESCOOKING, Constants.FRIESDONE, Constants.FRIESCOLD, Constants.FRYSHORT+"2", Constants.FRYCOOKTIME, Constants.FRYCOLDTIME);
-        sprite = new CookStation(new Vector2D(Constants.SPRITEX, Constants.SPRITEY), manager.getUtil(), new Vector2D(Constants.SPRITESIZE, Constants.SPRITESIZE), Constants.SPRITECOLOR, true, Constants.SPRITECOOKING, Constants.SPRITEDONE, Constants.SPRITECOLD, Constants.SPRITESHORT, Constants.SPRITECOOKTIME, Constants.SPRITECOLDTIME);
-        coke = new CookStation(new Vector2D(Constants.COKEX, Constants.COKEY), manager.getUtil(), new Vector2D(Constants.COKESIZE, Constants.COKESIZE), Constants.COKECOLOR, true, Constants.COKECOOKING, Constants.COKEDONE, Constants.COKECOLD, Constants.COKESHORT, Constants.COKECOOKTIME, Constants.COKECOLDTIME);
-        fanta = new CookStation(new Vector2D(Constants.FANTAX, Constants.FANTAY), manager.getUtil(), new Vector2D(Constants.FANTASIZE, Constants.FANTASIZE), Constants.FANTACOLOR, true, Constants.FANTACOOKING, Constants.FANTADONE, Constants.FANTACOLD, Constants.FANTASHORT, Constants.FANTACOOKTIME, Constants.FANTACOLDTIME);
-        oven = new CookStation(new Vector2D(Constants.PIZZAX, Constants.PIZZAY), manager.getUtil(), new Vector2D(Constants.PIZZASIZE, Constants.PIZZASIZE), Constants.PIZZACOLOR, true, Constants.PIZZACOOKING, Constants.PIZZADONE, Constants.PIZZACOLD, Constants.PIZZASHORT, Constants.PIZZACOOKTIME, Constants.PIZZACOLDTIME);
+        CookStation fry1 = new CookStation(new Vector2D(Constants.FRY1X, Constants.FRY1Y), manager.getUtil(), new Vector2D(Constants.FRYSIZE, Constants.FRYSIZE), Constants.FRYCOLOR, true, Constants.FRIESCOOKING, Constants.FRIESDONE, Constants.FRIESCOLD, Constants.FRYSHORT + "1", Constants.FRYCOOKTIME, Constants.FRYCOLDTIME);
+        CookStation fry2 = new CookStation(new Vector2D(Constants.FRY2X, Constants.FRY2Y), manager.getUtil(), new Vector2D(Constants.FRYSIZE, Constants.FRYSIZE), Constants.FRYCOLOR, true, Constants.FRIESCOOKING, Constants.FRIESDONE, Constants.FRIESCOLD, Constants.FRYSHORT + "2", Constants.FRYCOOKTIME, Constants.FRYCOLDTIME);
+        CookStation sprite = new CookStation(new Vector2D(Constants.SPRITEX, Constants.SPRITEY), manager.getUtil(), new Vector2D(Constants.SPRITESIZE, Constants.SPRITESIZE), Constants.SPRITECOLOR, true, Constants.SPRITECOOKING, Constants.SPRITEDONE, Constants.SPRITECOLD, Constants.SPRITESHORT, Constants.SPRITECOOKTIME, Constants.SPRITECOLDTIME);
+        CookStation coke = new CookStation(new Vector2D(Constants.COKEX, Constants.COKEY), manager.getUtil(), new Vector2D(Constants.COKESIZE, Constants.COKESIZE), Constants.COKECOLOR, true, Constants.COKECOOKING, Constants.COKEDONE, Constants.COKECOLD, Constants.COKESHORT, Constants.COKECOOKTIME, Constants.COKECOLDTIME);
+        CookStation fanta = new CookStation(new Vector2D(Constants.FANTAX, Constants.FANTAY), manager.getUtil(), new Vector2D(Constants.FANTASIZE, Constants.FANTASIZE), Constants.FANTACOLOR, true, Constants.FANTACOOKING, Constants.FANTADONE, Constants.FANTACOLD, Constants.FANTASHORT, Constants.FANTACOOKTIME, Constants.FANTACOLDTIME);
+        CookStation oven = new CookStation(new Vector2D(Constants.PIZZAX, Constants.PIZZAY), manager.getUtil(), new Vector2D(Constants.PIZZASIZE, Constants.PIZZASIZE), Constants.PIZZACOLOR, true, Constants.PIZZACOOKING, Constants.PIZZADONE, Constants.PIZZACOLD, Constants.PIZZASHORT, Constants.PIZZACOOKTIME, Constants.PIZZACOLDTIME);
 
 
-        tray = new Tray(new Vector2D(Constants.TRAYX, Constants.TRAYY), manager.getUtil());
-        customers = new Customers(new Vector2D(Constants.CUSTOMX, Constants.CUSTOMY), manager.getUtil(), manager);
+        Tray tray = new Tray(new Vector2D(Constants.TRAYX, Constants.TRAYY), manager.getUtil());
+        Customers customers = new Customers(new Vector2D(Constants.CUSTOMX, Constants.CUSTOMY), manager.getUtil());
         ticket1 = new Ticket(new Vector2D(Constants.TICKET1X, Constants.TICKET1Y), manager.getUtil(), 1);
         ticket2 = new Ticket(new Vector2D(Constants.TICKET2X, Constants.TICKET2Y), manager.getUtil(), 2);
         ticket3 = new Ticket(new Vector2D(Constants.TICKET3X, Constants.TICKET3Y), manager.getUtil(), 3);

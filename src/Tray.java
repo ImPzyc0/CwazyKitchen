@@ -3,6 +3,8 @@ import com.daniel.GSprite.Util.GUtility;
 import com.daniel.GSprite.Util.Vector2D;
 
 public class Tray extends Station {
+
+    //Getting/removing a tray simply
     public Tray(Vector2D position, GUtility util) {
         super(position, util, new Vector2D(Constants.TRAYSIZE, Constants.TRAYSIZE), Constants.TRAYCOLOR, true, Constants.TRAYSHORT);
     }

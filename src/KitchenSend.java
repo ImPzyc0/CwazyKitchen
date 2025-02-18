@@ -2,6 +2,8 @@ import java.util.Arrays;
 
 public enum KitchenSend{
 
+    //Send info the the server
+
     JOIN {
         @Override
         public void send(Client client, Object... data) {

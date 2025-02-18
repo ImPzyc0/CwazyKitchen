@@ -9,6 +9,8 @@ import java.util.List;
 
 public class Player extends RectangleImageHitboxSprite {//A player as shown in the game, name id etc.
 
+    //Any player in the game
+
     protected int id;
     private final String name;
     //Hashmap so it can have both Image and Colored sprites

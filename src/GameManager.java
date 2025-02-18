@@ -11,6 +11,9 @@ import java.util.TimerTask;
 
 public class GameManager extends Client{ //GameLoop, updates, Room, times
 
+    //The manager for any important game-essential but not kitchen-related things
+    //Has the client
+
     private final GUtility util;
 
     private KitchenManager kManager;

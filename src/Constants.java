@@ -2,6 +2,9 @@ import java.awt.*;
 
 public interface Constants {
 
+    //All the Constants required to handle the game and it's screens
+
+
     int FPS = 60;
 
 

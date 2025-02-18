@@ -6,6 +6,9 @@ import com.daniel.GSprite.Util.Vector2D;
 import java.awt.*;
 
 public class Ticket extends Station {
+
+    //A ticket station
+
     private final int number;
 
     private String[] ticketValue = null;

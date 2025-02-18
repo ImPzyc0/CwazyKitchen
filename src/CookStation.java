@@ -7,6 +7,8 @@ import java.awt.*;
 
 public class CookStation extends Station {
 
+    //A station with food
+
     protected enum State{
         EMPTY,
         COOKING,

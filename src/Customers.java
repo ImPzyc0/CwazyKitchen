@@ -3,11 +3,10 @@ import com.daniel.GSprite.Util.Vector2D;
 
 public class Customers extends Station {
 
-    private final GameManager manager;
+    //The station to get new tickets
 
-    public Customers(Vector2D position, GUtility util, GameManager manager) {
+    public Customers(Vector2D position, GUtility util) {
         super(position, util, new Vector2D(Constants.CUSTOMSIZE, Constants.CUSTOMSIZE), Constants.CUSTOMCOLOR, true, Constants.CUSTOMSHORT);
-        this.manager = manager;
     }
 
     //Methods useless as the station itself doesn`t ever change

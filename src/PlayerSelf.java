@@ -10,9 +10,10 @@ import java.util.List;
 
 public class PlayerSelf extends Player { //You yourself, movement inputs, sending them to the server etc.
 
+    //The Player itself
     private final List<Station> stationsCurrentlyIn = new ArrayList<>();
 
-    private Vector2D updatedPos;
+    private final Vector2D updatedPos;
 
     public PlayerSelf(Vector2D position, GUtility util, Vector2D hitboxSize, String path, int id, String name) {
         super(position, util, hitboxSize, path, id, name);

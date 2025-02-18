@@ -2,6 +2,7 @@ import java.util.Arrays;
 
 public enum KitchenHandle {
 
+    //Handle any incoming traffic
 
     CONNECTED {
         @Override
