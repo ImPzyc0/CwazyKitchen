@@ -5,7 +5,8 @@ public interface Constants {
     int FPS = 60;
 
 
-    double SCALE = 0.6; //Größe des Bildschirms: 1 - 1200x800, NICHT PERFEKT!
+    double SCALE = 1; //Größe des Bildschirms: 1 - 1200x800, NICHT PERFEKT!
+    double COOKTIMEMULTIPLIER = 1;
 
     int WIDTH = (int) (1200*SCALE);
     int HEIGHT = (int) (800*SCALE);
@@ -15,7 +16,7 @@ public interface Constants {
     String PLAYERTRAY = "tray.jpg";
     Color BACKGROUNDCOLOR = Color.GRAY;
 
-    double MOVEMENTSPEED = 260/FPS*SCALE;
+    double MOVEMENTSPEED = 350/FPS*SCALE;
 
     double TOPBORDER = 747*SCALE;
     double BOTTOMBORDER = 53*SCALE;
@@ -32,8 +33,8 @@ public interface Constants {
     double GRILLSIZE = 120*1.5*SCALE;
     Color GRILLCOLOR = Color.DARK_GRAY;
     String GRILLSHORT = "Grill";
-    int GRILLCOOKTIME = 3000;
-    int GRILLCOLDTIME = 1500;
+    int GRILLCOOKTIME = (int) (10000*COOKTIMEMULTIPLIER);
+    int GRILLCOLDTIME = (int) (5000*COOKTIMEMULTIPLIER);
 
     String PATTYCOOKING = "pattycooking.jpg";
     String PATTYDONE = "pattydone.jpg";
@@ -45,8 +46,8 @@ public interface Constants {
     double FRYSIZE = 60*1.5*SCALE;
     Color FRYCOLOR = Color.ORANGE;
     String FRYSHORT = "Frier";
-    int FRYCOOKTIME = 3000;
-    int FRYCOLDTIME = 1500;
+    int FRYCOOKTIME = (int) (8000*COOKTIMEMULTIPLIER);
+    int FRYCOLDTIME = (int) (4000*COOKTIMEMULTIPLIER);
     //Fry2pos
     double FRY2X = 505*SCALE;
     double FRY2Y = 725*SCALE;
@@ -61,10 +62,10 @@ public interface Constants {
     Color COKECOLOR = Color.BLACK;
     String COKESHORT = "Coke";
     String COKEDONE = "cokedone.jpg";
-    String COKECOOKING = "emptycup.jpg";
+    String COKECOOKING = "cokeemptycupcooking.jpg";
     String COKECOLD = "cokecold.jpg";
-    int COKECOOKTIME = 3000;
-    int COKECOLDTIME = 1500;
+    int COKECOOKTIME = (int) (7000*COOKTIMEMULTIPLIER);
+    int COKECOLDTIME = (int) (15000*COOKTIMEMULTIPLIER);
     //Sprite
     double SPRITEX = 695*SCALE;
     double SPRITEY = 725*SCALE;
@@ -72,18 +73,18 @@ public interface Constants {
     Color SPRITECOLOR = Color.LIGHT_GRAY;
     String SPRITESHORT = "Sprite";
     String SPRITEDONE = "spritedone.jpg";
-    String SPRITECOOKING = "emptycup.jpg";
+    String SPRITECOOKING = "spriteemptycupcooking.jpg";
     String SPRITECOLD = "spritecold.jpg";
-    int SPRITECOOKTIME = 3000;
-    int SPRITECOLDTIME = 1500;
+    int SPRITECOOKTIME = COKECOOKTIME;
+    int SPRITECOLDTIME = COKECOLDTIME;
     //Pizzaoven
     double PIZZAX = 920*SCALE;
     double PIZZAY = 695*SCALE;
     double PIZZASIZE = 100*1.5*SCALE;
     Color PIZZACOLOR = Color.PINK;
     String PIZZASHORT = "Pizza";
-    int PIZZACOOKTIME = 3000;
-    int PIZZACOLDTIME = 1500;
+    int PIZZACOOKTIME = (int) (20000*COOKTIMEMULTIPLIER);
+    int PIZZACOLDTIME = (int) (8000*COOKTIMEMULTIPLIER);
     String PIZZACOOKING = "pizzacooking.jpg";
     String PIZZACOLD = "pizzacold.jpg";
     String PIZZADONE = "pizzadone.jpg";
@@ -94,10 +95,10 @@ public interface Constants {
     Color FANTACOLOR = new Color(254,231,70);
     String FANTASHORT = "Fanta";
     String FANTADONE = "fantadone.jpg";
-    String FANTACOOKING = "emptycup.jpg";
+    String FANTACOOKING = "fantaemptycupcooking.jpg";
     String FANTACOLD = "fantacold.jpg";
-    int FANTACOOKTIME = 3000;
-    int FANTACOLDTIME = 1500;
+    int FANTACOOKTIME = COKECOOKTIME;
+    int FANTACOLDTIME = COKECOLDTIME;
     //Tray
     double TRAYX = 900*SCALE;
     double TRAYY = 130*SCALE;

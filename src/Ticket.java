@@ -17,10 +17,9 @@ public class Ticket extends Station {
         this.number = number;
     }
 
+    //Empty as it is handled fully int the KitchenHandle as further information is required
     @Override
     public void leftclick(Player player) {
-
-
     }
 
     @Override
@@ -49,9 +48,16 @@ public class Ticket extends Station {
 
         }
 
+
+
+
     }
 
     public void setTicketValue(String[] ticketValue) {
         this.ticketValue = ticketValue;
+    }
+
+    public int getNumber() {
+        return number;
     }
 }

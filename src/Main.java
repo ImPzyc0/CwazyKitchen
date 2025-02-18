@@ -8,8 +8,6 @@ import java.awt.event.ActionListener;
 
 public class Main {
 
-    private static GameManager gManager;
-
 
     public static void main(String[] args) {
        //Zum Aufbau von meiner Aplu-Library, damit der Code der GPanelSpriteApi Sinn ergibt
@@ -108,7 +106,7 @@ public class Main {
                 port.setVisible(false);
                 name.setVisible(false);
                 loginlabel.setVisible(false);
-                gManager = new GameManager(util, ip.getText(), Integer.parseInt(port.getText()), name.getText().replace(' ', '_'));
+                new GameManager(util, ip.getText(), Integer.parseInt(port.getText()), name.getText().replace(' ', '_'));
             }
         });
 

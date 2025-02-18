@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PlayerSelf extends Player { //You yourself, movement inputs, sending them to the server etc.
 
-    private final List<Station> stationsCurrentlyIn = new ArrayList<Station>();
+    private final List<Station> stationsCurrentlyIn = new ArrayList<>();
 
     private Vector2D updatedPos;
 
@@ -83,4 +83,5 @@ public class PlayerSelf extends Player { //You yourself, movement inputs, sendin
     public List<Station> getStationsCurrentlyIn() {
         return stationsCurrentlyIn;
     }
+
 }

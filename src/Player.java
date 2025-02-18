@@ -26,10 +26,6 @@ public class Player extends RectangleImageHitboxSprite {//A player as shown in t
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
     @Override
     public void draw() {
         if(image == null){return;}
@@ -121,5 +117,18 @@ public class Player extends RectangleImageHitboxSprite {//A player as shown in t
             trayItems.get(i).setPosition(calculatePosOfItem(i));
 
         }
+    }
+
+    public String getFoodOnTray(){
+        if(!hasTray()){
+            return null;
+        }
+        StringBuilder str = new StringBuilder();
+
+        for(int i = 1; i < trayItems.size(); i++){
+            str.append(",").append(trayItems.get(i).getPath().replace(".jpg", ""));
+        }
+
+        return str.toString();
     }
 }

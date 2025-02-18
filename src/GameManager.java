@@ -29,7 +29,7 @@ public class GameManager extends Client{ //GameLoop, updates, Room, times
     private TextArea area;
 
     private int roomCode = -1;
-    private GameManager manager = this;
+    private final GameManager manager = this;
 
     private Timer gameloop;
 

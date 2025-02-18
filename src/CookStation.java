@@ -35,7 +35,7 @@ public class CookStation extends Station {
 
     @Override
     public void leftclick(Player player) {
-        if(!player.hasTray() || !player.trayHasSpace() || sprite == null){return;}
+        //if(!player.hasTray() || !player.trayHasSpace() || sprite == null){return;}
         String str = switch (state) {
             case DONE -> done;
             case COOKING -> cooking;
@@ -49,7 +49,7 @@ public class CookStation extends Station {
 
     @Override
     public void rightclick(Player player) {
-        if(player.hasTray()){return;}
+        //if(player.hasTray()){return;}
         if(state == State.EMPTY){
             this.sprite = new RectangleImageHitboxSprite(position, util, new Vector2D(this.hitboxSize.getX()/5*4, this.hitboxSize.getX()/5*4), cooking);
 
@@ -59,7 +59,7 @@ public class CookStation extends Station {
     }
     @Override
     public void throwaway(Player player) {
-        if(sprite == null){return;}
+        //if(sprite == null){return;}
         state = State.EMPTY;
         sprite.remove();
         sprite = null;

@@ -1,7 +1,8 @@
 import com.daniel.GSprite.Util.Vector2D;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
 
 public class KitchenManager {
@@ -21,6 +22,12 @@ public class KitchenManager {
 
     private final List<Station> stations = new ArrayList<>();
 
+    private double money = 0;
+    private final Label moneyLabel = new Label();
+    private final Label missingPlayerLabel = new Label();
+
+    private final Label timeLeftLabel = new Label();
+
     public KitchenManager(GameManager manager){
         grill = new Grill(new Vector2D(Constants.GRILLX, Constants.GRILLY), manager.getUtil(), new Vector2D(Constants.GRILLSIZE, Constants.GRILLSIZE), Constants.GRILLCOLOR, true, Constants.PATTYCOOKING, Constants.PATTYDONE, Constants.PATTYCOLD, Constants.GRILLSHORT, Constants.GRILLCOOKTIME, Constants.GRILLCOLDTIME);
 
@@ -39,6 +46,25 @@ public class KitchenManager {
         ticket3 = new Ticket(new Vector2D(Constants.TICKET3X, Constants.TICKET3Y), manager.getUtil(), 3);
         ticket4 = new Ticket(new Vector2D(Constants.TICKET4X, Constants.TICKET4Y), manager.getUtil(), 4);
 
+
+        moneyLabel.setText("Money: "+Math.round(money*10)/10);
+        moneyLabel.setSize(Constants.WIDTH/10, Constants.HEIGHT/10);
+        moneyLabel.setLocation(0, Constants.HEIGHT/7);
+        moneyLabel.setFont(new Font("", 0, (Constants.FONTSIZE/(3))));
+
+        missingPlayerLabel.setText("Missing Players: "+(3-playersInRoom.size()));
+        missingPlayerLabel.setSize(Constants.WIDTH/9, Constants.HEIGHT/10);
+        missingPlayerLabel.setLocation(0, Constants.HEIGHT/7*2);
+        missingPlayerLabel.setFont(new Font("", 0, (Constants.FONTSIZE/(3))));
+
+        timeLeftLabel.setText("Game hasn't started!");
+        timeLeftLabel.setSize(Constants.WIDTH/9, Constants.HEIGHT/10);
+        timeLeftLabel.setLocation(0, Constants.HEIGHT/7*3);
+        timeLeftLabel.setFont(new Font("", 0, (int) (Constants.FONTSIZE/(3.5))));
+
+        manager.getUtil().getPanel().addComponent(moneyLabel);
+        manager.getUtil().getPanel().addComponent(missingPlayerLabel);
+        manager.getUtil().getPanel().addComponent(timeLeftLabel);
         stations.addAll(Arrays.asList(grill, fry1, fry2, sprite, coke, fanta, oven, tray, customers, ticket1, ticket2, ticket3, ticket4));
 
         this.manager = manager;
@@ -57,13 +83,16 @@ public class KitchenManager {
 
     //An Interaction in the game from Playerself
     public void interaction(Station station, boolean leftclick, boolean rightclick, boolean epressed){
-        //Sends to the server; Remove local calls!
-        //HAS TO BE REMOVED!!
-        /*
-        if(leftclick){station.leftclick(manager.getPlayerself());}
-        if(rightclick){station.rightclick(manager.getPlayerself());}
-        if(epressed){station.throwaway(manager.getPlayerself());}
-        */
+        //Sends to the server
+
+        if(!active){return;}
+
+        //Tickets get handled elsewhere as they require more information that would be an overload and unecessary on the server
+        if(station instanceof Ticket && (leftclick || rightclick || epressed)){
+
+            ticketInteraction(((Ticket) station).getNumber());
+            return;
+        }
 
         if(leftclick){KitchenSend.INT.send(manager, station.getName(), "l");}
         if(rightclick){KitchenSend.INT.send(manager, station.getName(), "r");}
@@ -72,7 +101,7 @@ public class KitchenManager {
     }
 
     public void handleInteraction(String station, String interaction, String id){
-
+        if(!active){return;}
         int idHere = Integer.parseInt(id);
 
         if(interaction.equals("l")){getStationByName(station).leftclick(manager.getKitchenManager().getPlayer(idHere));}
@@ -82,10 +111,23 @@ public class KitchenManager {
 
     }
 
-    public void addPlayer(int id, String name){
+    private void ticketInteraction(int ticketNumber){
 
+        String items = manager.getPlayerself().getFoodOnTray();
+
+        if(items == null){
+            return;
+        }
+
+        KitchenSend.TICKET.send(manager, ticketNumber, items);
+
+    }
+
+    public void addPlayer(int id, String name){
         Player player = new Player(new Vector2D((double) Constants.WIDTH / 2, (double) Constants.HEIGHT / 2), manager.getUtil(), new Vector2D(Constants.PLAYERSIZE, Constants.PLAYERSIZE), Constants.PLAYERS[playersInRoom.size()+1], id, name);
         playersInRoom.add(player);
+
+        missingPlayerLabel.setText("Missing Players: "+(3-playersInRoom.size()));
     }
 
     public void updatePlayerPos(int id, int x, int y){
@@ -100,11 +142,14 @@ public class KitchenManager {
     }
 
     public void setActive(boolean active) {
+        missingPlayerLabel.setVisible(false);
+        timeLeftLabelStart();
+
         this.active = active;
     }
 
 
-    public void setTicket(int ticket, String[] value){
+    public void setTicket(int ticket, @Nullable String[] value){
 
         switch(ticket){
             case 1:
@@ -125,11 +170,6 @@ public class KitchenManager {
 
     }
 
-
-    public Tray getTray() {
-        return tray;
-    }
-
     public Player getPlayer(int id){
         for(Player player : playersInRoom){
             if(player.getId() == id){
@@ -142,5 +182,40 @@ public class KitchenManager {
         }
 
         return null;
+    }
+
+    public void addMoney(double value){
+        money += value;
+
+        moneyLabel.setText("Money: "+Math.round(money*10)/10);
+    }
+
+    private void timeLeftLabelStart(){
+
+        final int[] minutes = {5};
+        final int[] seconds = {0};
+
+        timeLeftLabel.setText("Time left: "+ minutes[0] +"."+ seconds[0]);
+
+
+        Timer timer = new Timer();
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if(seconds[0] == 0 && minutes[0] == 0){this.cancel(); return;}
+
+                if(seconds[0] == 0){
+                    minutes[0]--;
+                    seconds[0] = 59;
+                }else {
+                    seconds[0]--;
+                }
+
+                timeLeftLabel.setText("Time left: "+ minutes[0] +":"+ (seconds[0] > 9 ? seconds[0] : "0"+seconds[0]));
+
+            }
+        }, 50, 1000);
+
     }
 }
